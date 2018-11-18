@@ -1,0 +1,12 @@
+body{
+    margin: 0;
+    font-family: "Microsoft YaHei";
+    background-color: #f6f6f6;
+}
+.container{
+    width: 100%;
+    max-width: 1260px;
+    min-width: 755px;
+    margin: 0 auto;
+    overflow: hidden;
+}
