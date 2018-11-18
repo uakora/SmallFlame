@@ -1,1 +1,4 @@
 .idea/
+*.pyc
+src/db.sqlite3
+src/log.txt
