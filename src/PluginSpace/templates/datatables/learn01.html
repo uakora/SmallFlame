@@ -1,0 +1,37 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="nav-bar-box">
+    <div class="container">
+        <ul class="flame-nav-bar">
+            <li>
+                <a href="/home">首 页</a>
+            </li>
+            <li>
+                <a class="active" href="/plugins/index">前端插件</a>
+            </li>
+            <li>
+                <a href="#">JavaScript</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container page-body">
+    <div class="left-column">
+        <div class="left-nav-title">
+            <i class="fa fa-reorder"></i>DataTable练习
+        </div>
+        <ul class="left-nav-bar">
+            <li>
+                <a href="#">初始化</a>
+            </li>
+            <li>
+                <a href="#">产生设置</a>
+            </li>
+        </ul>
+    </div>
+    <div class="center-column">
+        <div>练习区域</div>
+    </div>
+</div>
+{% endblock %}

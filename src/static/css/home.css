@@ -73,30 +73,112 @@ ul.flame-nav-bar > li > a.active{
 .page-body .left-column{
     float: left;
     width: 15%;
-    height: 200px;
-    border-left: 1px solid #2aabd2;
+    height: auto;
 }
 .page-body .center-column{
     float: right;
-    width: calc(85% - 16px);
-    height: 200px;
-    padding: 0 6px;
+    padding: 8px 13px;
+    width: 82%;
+    height: auto;
+    min-height: 320px;
     background-color: #ffffff;
-    border-left: 1px solid #2aabd2;
-    border-right: 1px solid slateblue;
-}
-.left-column i.fa{
-    margin-right: 6px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
 }
 .left-nav-title{
     padding-top: 8px;
     padding-bottom: 8px;
     color: #ffffff;
-    background-color: #2bb2bf;
+    background-color: #5bc0de;
+    border-bottom: 1px solid #46b8da
 }
 ul.left-nav-bar{
     list-style: none;
-    margin: 4px 0;
+    margin: 0 0;
     padding-inline-start: 0;
-    padding: 0;
+    padding: 0 0;
+    border: 1px solid #eaeaea;
+    box-shadow: -1px 1px 1px #c8c8c8;
+}
+ul.left-nav-bar > li{
+    border-bottom: 2px solid #ffffff;
+}
+ul.left-nav-bar > li:last-child{
+    border-bottom: 1px solid #efefef;
+}
+.left-column i.fa{
+    margin-left: 6px;
+    margin-right: 6px;
+}
+/*
+.left-nav-bar li:nth-child(odd){
+    background-color: transparent;
+}
+.left-nav-bar li:nth-child(even){
+    background-color: transparent;
+}
+*/
+
+.left-nav-bar i.fa{
+    vertical-align: middle;
+}
+.left-nav-bar a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-decoration: none;
+    color: #333333;
+}
+.left-nav-bar a:hover{
+    background-color: #eaeaea;
+}
+.plugin-panel{
+    margin-bottom: 15px;
+}
+.plugin-panel > h3{
+    margin: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #eaeaea;
+}
+.plugin-panel > h3 i.fa{
+    vertical-align: middle;
+}
+.plugin-cards{
+    display: flex;
+    justify-content:space-around;
+    margin-bottom:8px;
+}
+.plugin-cards a{
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    width: 28%;
+    height: 80px;
+    padding: 6px 13px;
+    margin-top: 8px;
+    border-radius: 5px;
+    color: #505050;
+    background-color: #f6f6f6;
+    box-shadow: 1px 1px 2px #c8c8c8;
+    text-align: center;
+}
+.plugin-cards a:hover{
+    background-color: #eaeaea;
+}
+.plugin-cards a:hover i{
+    color: #ae1bf1;
+}
+.plugin-cards .diamond-list{
+    position: absolute;
+    display: inline-block;
+    right: 5px;
+    top: 0;
+}
+.plugin-cards a > span{
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    font-size: 2.5rem;
 }
