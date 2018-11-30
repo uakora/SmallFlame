@@ -7,3 +7,6 @@ web small flame
 
 https://github.com/vuejs/vue/
 
+http://plugins.krajee.com/file-input#installation 
+Manual Install
+
