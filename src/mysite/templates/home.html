@@ -9,9 +9,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/home.css">
     {% block css %}
     {% endblock %}
+
     <script src="/static/3rdLibs/jquery-3.2.1/jquery-3.2.1.js"></script>
     {% block js %}
     {% endblock %}
+
 </head>
 <body>
 <div class="container page-header">
@@ -44,6 +46,9 @@
 <div class="container page-footer"></div>
 {% endblock %}
 </body>
+
+{% block custom_js %}
+{% endblock %}
 
 
 </html>
