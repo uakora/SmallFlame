@@ -98,7 +98,7 @@ ul.left-nav-bar{
     padding-inline-start: 0;
     padding: 0 0;
     border: 1px solid #eaeaea;
-    box-shadow: -1px 1px 1px #c8c8c8;
+    /*box-shadow: -1px 1px 1px #c8c8c8;*/
 }
 ul.left-nav-bar > li{
     border-bottom: 2px solid #ffffff;
@@ -126,8 +126,7 @@ ul.left-nav-bar > li:last-child{
     display: inline-block;
     width: 100%;
     height: 100%;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding: 6px 8px;
     text-decoration: none;
     color: #333333;
 }

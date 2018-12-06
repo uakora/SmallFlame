@@ -126,13 +126,10 @@ $(document).ready(function () {
     "user strict"
 
     $("#dt_01").DataTable({
-        createdRow: function (row, data, index) {
-            if ( data[5].replace(/[\$,]/g, '') * 1 > 4000 ) {
-                $('td', row).eq(5).css('font-weight',"bold").css("color","red");
-            }
-        }
+        dom: 'rtip',
+        searchDelay: 350
     });
-        
+
 });
 </script>
 {% endblock %}

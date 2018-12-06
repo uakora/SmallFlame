@@ -1,0 +1,24 @@
+	oTable_Main.columns().every( function () {
+		var that = this;
+		$( 'input', this.footer() ).on( 'keyup change', function (e) {	//各列搜索框
+			var isHZnum=false;
+			var RegHZ = /^[0-9\u4e00-\u9fa5]+$/;			//汉字+数字范围
+			if (RegHZ.test(this.value)) {isHZnum=true;}else{isHZnum=false;}
+			if (isHZnum&&that.search()!==this.value&&e.keyCode!=8) {//汉字数字范围内的内容才提交搜索，回退键也不提交搜索
+//				$('input[aria-controls="example"]')[0].value='';		//清除全局搜索内容,防止干扰，不管用
+				oTable_Main.search("");				//清除掉全局搜索框内容,防止干扰
+				that
+					.search( this.value )
+					.draw();
+			}
+			if(this.value==''){
+				that.search('');		//清空搜索内容，但不刷新
+//					.draw();
+			}
+		} );
+	} );
+---------------------
+作者：zzzzaj2012
+来源：CSDN
+原文：https://blog.csdn.net/zzzzaj2012/article/details/82796635
+版权声明：本文为博主原创文章，转载请附上博文链接！
