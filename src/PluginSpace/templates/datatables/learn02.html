@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+{% endblock %}
+{% block js %}
+    <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=1  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <div id="sex_select" style="display: inline-block; margin: 10px 0; width: 30%;">
+            <label>性别&nbsp;</label>
+            <select class="form-control" style="display: inline-block; width: 250px;">
+                <option value=""></option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div id="role_select" style="display: inline-block; margin: 10px 20px; width: 30%;">
+            <label>角色&nbsp;</label>
+            <select class="form-control" style="display: inline-block; width: 250px;">
+                <option value=""></option>
+                <option value="LM">LM</option>
+                <option value="PL">PL</option>
+                <option value="SE">SE</option>
+                <option value="MDE">MDE</option>
+                <option value="DEVELOPER">DEVELOPER</option>
+                <option value="TEST">TEST</option>
+            </select>
+        </div>
+        <div id="all_select" style="margin: 10px 0 20px;">
+            <label>自定义全局搜索&nbsp;</label>
+            <input class="form-control" type="text" style="display: inline-block; width: 250px;">
+        </div>
+        <table id="example" class="table table-hover table-bordered" style="width: 100px;">
+            <thead>
+            <tr>
+                {% for foo in table_head %}
+                <th>{{ foo }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+        </table>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+$(document).ready(function () {
+    var table = $("#example").DataTable({
+        language: {
+            url: "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
+        },
+        searchDelay: 350,
+        scrollX: true,
+        scrollCollapse: true,
+        ajax: "/plugins/datatable/learn02/data",
+        columns: [
+            {data: "name"},
+            {data: "sex"},
+            {data: "role"},
+            {data: "year_total"},
+            {data: "month_avg"},
+            {data: "code_enum.0", orderable: false},
+            {data: "code_enum.1", orderable: false},
+            {data: "code_enum.2", orderable: false},
+            {data: "code_enum.3", orderable: false},
+            {data: "code_enum.4", orderable: false},
+            {data: "code_enum.5", orderable: false},
+            {data: "code_enum.6", orderable: false},
+            {data: "code_enum.7", orderable: false},
+            {data: "code_enum.8", orderable: false},
+            {data: "code_enum.9", orderable: false},
+            {data: "code_enum.10", orderable: false},
+            {data: "code_enum.11", orderable: false}
+        ]
+    });
+
+    function search_table(value, idx){
+        if(idx) {
+            table.columns(idx).search(value).draw();
+            return
+        }
+        table.search(value).draw();
+    }
+
+    $("#sex_select select").change(function () {
+        search_table($(this).val(), 1);
+    });
+    $("#role_select select").on("change", function () {
+        search_table($(this).val(), 2);
+    });
+    $("#all_select input").keyup(function () {
+        search_table($(this).val());
+    });
+});
+</script>
+{% endblock %}
+
