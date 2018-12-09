@@ -1,101 +1,56 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<div class="nav-bar-box">
-    <div class="container">
-        <ul class="flame-nav-bar">
-            <li>
-                <a href="/home">首 页</a>
-            </li>
-            <li>
-                <a class="active" href="/plugins/index">前端插件</a>
-            </li>
-            <li>
-                <a href="#">JavaScript</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="container page-body">
+<div class="flame-container flame-body">
     <div class="left-column">
-        <div class="left-nav-title">
-            <i class="fa fa-reorder"></i>全部插件
-        </div>
-        <ul class="left-nav-bar">
-            <li>
-                <a href="#"><i class="fa fa-external-link"></i>表格插件</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-external-link"></i>日期插件</a>
-            </li>
-        </ul>
+        {% block left_nav_bar %}
+        {% include 'index_left_nav_bar.html' %}
+        {% endblock %}
     </div>
     <div class="center-column">
-        <div class="plugin-panel">
-            <h3><i class="fa fa-list"></i>&nbsp;表格插件</h3>
-            <div class="plugin-cards">
-                <a href="/plugins/datatable/learn01">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                    </div>
-                    <span>DataTable</span>
-                </a>
-                <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                    </div>
-                    <span>jQGrid</span>
-                </a>
-                <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                    </div>
-                    <span>普通表格</span>
-                </a>
+        {% block center_content %}
+            <div class="plugin-panel">
+                <h3><i class="fa fa-list"></i>&nbsp;表格插件</h3>
+                <div class="plugin-cards">
+                    <a href="/plugins/datatable/learn01">
+                        <span>DataTable</span>
+                    </a>
+                    <a href="#">
+                        <span>jQGrid</span>
+                    </a>
+                    <a href="#">
+                        <span>普通表格</span>
+                    </a>
+                </div>
+                <div class="plugin-cards">
+                    <a href="#">
+                        <span>DataTable</span>
+                    </a>
+                    <a href="#">
+                        <span>jQGrid</span>
+                    </a>
+                    <a href="#" style="visibility: hidden"></a>
+                </div>
             </div>
-            <div class="plugin-cards">
-                <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                    </div>
-                    <span>DataTable</span>
-                </a>
-                <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                    </div>
-                    <span>jQGrid</span>
-                </a>
-                <a href="#" style="visibility: hidden"></a>
-            </div>
-        </div>
-        <div class="plugin-panel">
+            <div class="plugin-panel">
             <h3><i class="fa fa-list"></i>&nbsp;日历插件</h3>
             <div class="plugin-cards">
                 <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                        <i class="fa fa-diamond"></i>
-                    </div>
                     <span>DataTable</span>
                 </a>
                 <a href="#">
-                    <div class="diamond-list">
-                        <i class="fa fa-diamond"></i>
-                    </div>
                     <span>jQGrid</span>
                 </a>
                 <a href="#" style="visibility: hidden"></a>
             </div>
         </div>
+        {% endblock %}
+
     </div>
 </div>
-<div class="container page-footer"></div>
 
+{% endblock %}
+
+{% block setting_js %}
+<script src="/static/js/PluginSpace/index.js"></script>
 {% endblock %}

@@ -16,37 +16,22 @@
 
 </head>
 <body>
-<div class="container page-header">
-    <div class="logo"></div>
-    <div class="website-name">The Small Flame</div>
-    <div class="search-box">
-        <input type="text" placeholder="search......">
-    </div>
-</div>
+{% include 'page_header.html' %}
+{% include 'top_nav_bar.html' %}
 {% block content %}
-<div class="nav-bar-box">
-    <div class="container">
-        <ul class="flame-nav-bar">
-            <li>
-                <a class="active" href="/home">首 页</a>
-            </li>
-            <li>
-                <a href="/plugins/index">前端插件</a>
-            </li>
-            <li>
-                <a href="#">JavaScript</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="container page-body">
+<div class="flame-container flame-body">
 {#    <div class="left-column"></div>#}
 {#    <div class="center-column"></div>#}
 </div>
-<div class="container page-footer"></div>
 {% endblock %}
 </body>
 
+{# 用于设置 #}
+{% block setting_js %}
+<script src="/static/js/mysite/home.js"></script>
+{% endblock %}
+
+{# 自己的Js文件 #}
 {% block custom_js %}
 {% endblock %}
 

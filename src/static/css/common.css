@@ -1,9 +1,20 @@
-body{
-    margin: 0;
-    font-family: "Microsoft YaHei";
-    background-color: #f6f6f6;
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
-.container{
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+body{
+    margin: 0 !important;
+    font-family: "Microsoft YaHei" !important;
+    background-color: #f6f6f6 !important;
+}
+.flame-container{
     width: 100%;
     max-width: 1260px;
     min-width: 755px;

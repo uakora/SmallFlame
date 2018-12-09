@@ -1,4 +1,4 @@
-{% extends 'home.html' %}
+{% extends 'index.html' %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
@@ -10,39 +10,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="nav-bar-box">
-    <div class="container">
-        <ul class="flame-nav-bar">
-            <li>
-                <a href="/home">首 页</a>
-            </li>
-            <li>
-                <a class="active" href="/plugins/index">前端插件</a>
-            </li>
-            <li>
-                <a href="#">JavaScript</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="container page-body">
+<div class="flame-container flame-body">
     <div class="left-column">
-        <div class="left-nav-title">
-            <i class="fa fa-reorder"></i>DataTable练习
-        </div>
-        <ul class="left-nav-bar">
-            <li>
-                <a href="/plugins/datatable/learn01">练习一</a>
-            </li>
-            <li>
-                <a href="/plugins/datatable/learn02">练习二(隐藏搜索框)</a>
-            </li>
-            <li>
-                <a href="/plugins/datatable/learn03">练习三</a>
-            </li>
-        </ul>
+        {% block left_nav_bar %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=0  %}
+        {% endblock %}
     </div>
     <div class="center-column">
+        {% block center_content %}
         <table id="dt_01" class="table table-hover">
             <thead>
             <tr>
@@ -114,17 +89,15 @@
             </tr>
             </tbody>
         </table>
+        {% endblock %}
     </div>
 </div>
 {% endblock %}
 
 {% block custom_js %}
-
-
 <script type="text/javascript">
 $(document).ready(function () {
     "user strict"
-
     $("#dt_01").DataTable({
         createdRow: function (row, data, index) {
             if ( data[5].replace(/[\$,]/g, '') * 1 > 4000 ) {
@@ -132,7 +105,6 @@ $(document).ready(function () {
             }
         }
     });
-        
 });
 </script>
 {% endblock %}
