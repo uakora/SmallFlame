@@ -79,7 +79,7 @@ ul.flame-nav-bar > li > a.active{
 .flame-body .center-column{
     float: right;
     padding: 8px 13px;
-    width: 82%;
+    width: calc(85% - 13px);
     height: auto;
     min-height: 320px;
     background-color: #ffffff;

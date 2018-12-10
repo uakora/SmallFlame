@@ -14,12 +14,19 @@ def datatable_learn02(request):
                   'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.',
                   'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.']
     return render(request, 'datatables/learn02.html', {'table_head': table_head})
-def datatable_learn02_data(request):
-    names = ['Abbie', 'Acacia', 'Adalia', 'Adelaide', 'Adonia', 'Amber', 'Antonia', 'Aurora', 'Azura', 'Alysa', 'Akili',
-             'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie',
-             'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie',
-             'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie',
-             'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie', 'Abbie']
+
+def datatable_learn03(request):
+    table_head = ['姓名', '性别', '角色', '全年', '月均',
+                  'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.',
+                  'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.']
+    return render(request, 'datatables/learn03.html', {'table_head': table_head})
+
+def datatable_data_year(request):
+    names = ['Abbie', 'Joe', 'Darwin', 'Eilian', 'David', 'Ken', 'Joseph', 'Duke', 'Eric', 'Luke', 'Evan',
+             'Denny', 'Johnny', 'Joe', 'Leo', 'Benjamin', 'Alysa', 'Gary', 'Mark', 'Michael', 'Blake', 'George',
+             'Acacia', 'Adalia', 'Lawrence', 'Azura', 'Benson', 'Billy', 'Brown', 'Hank', 'Glen', 'Mike', 'Nicholas',
+             'Adelaide', 'Ray', 'Jason', 'Antonia', 'Jeffery', 'Aurora', 'Charles', 'Cameron', 'Howard', 'Robinson', 'Norman',
+             'Amber', 'James', 'Adonia', 'James', 'Cecil', 'Jeffery', 'Christian', 'Akili', 'Harry', 'Quentin', 'Owen']
     sex_enum = ['男', '女']
     role_enum = ['LM', 'PL', 'SE', 'MDE', 'DEVELOPER', 'TEST']
     month_enum = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.']
@@ -42,6 +49,3 @@ def datatable_learn02_data(request):
 
         data.append(item)
     return HttpResponse(json.dumps({'data': data}))
-
-def datatable_learn03(request):
-    return render(request, 'datatables/learn03.html')

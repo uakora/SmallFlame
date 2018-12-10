@@ -15,12 +15,11 @@
 <div class="flame-container flame-body">
     <div class="left-column">
         {% block left_nav_bar %}
-        {% include 'datatables_left_nav_bar.html' with active_idx=1  %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=2  %}
         {% endblock %}
     </div>
     <div class="center-column">
         {% block center_content %}
-
         <table id="example" class="table table-hover table-bordered" style="width: 100%;">
             <thead>
             <tr>
@@ -30,34 +29,6 @@
             </tr>
             </thead>
         </table>
-
-        <div style="display: flex; justify-content: space-between; margin: 25px 0;">
-            <div id="sex_select">
-                <label>性别（列搜索）&nbsp;</label>
-                <select class="form-control" style="display: inline-block; width: 250px;">
-                    <option value=""></option>
-                    <option value="男">男</option>
-                    <option value="女">女</option>
-                </select>
-            </div>
-            <div id="role_select">
-                <label>角色（列搜索）&nbsp;</label>
-                <select class="form-control" style="display: inline-block; width: 250px;">
-                    <option value=""></option>
-                    <option value="LM">LM</option>
-                    <option value="PL">PL</option>
-                    <option value="SE">SE</option>
-                    <option value="MDE">MDE</option>
-                    <option value="DEVELOPER">DEVELOPER</option>
-                    <option value="TEST">TEST</option>
-                </select>
-            </div>
-            <div id="all_select">
-                <label>全局搜索&nbsp;</label>
-                <input class="form-control" type="text" style="display: inline-block; width: 250px;">
-            </div>
-        </div>
-
         {% endblock %}
     </div>
 </div>
@@ -75,7 +46,7 @@ $(document).ready(function () {
         scrollCollapse: true,
         ajax: "/plugins/datatable/data/year",
         columns: [
-            {data: "name"},
+            {data: "name", orderable: false},
             {data: "sex"},
             {data: "role"},
             {data: "year_total"},
@@ -95,23 +66,13 @@ $(document).ready(function () {
         ]
     });
 
-    function search_table(value, idx){
-        if(idx) {
-            table.columns(idx).search(value).draw();
-            return
-        }
-        table.search(value).draw();
-    }
+    $("#example tbody").on("click", "tr", function () {
+        //console.log("AAAAAAAA");
+        //$(this).toggleClass("selectd");
+        //console.log(table.rows('.selected').data());
+        console.log(table.row(this).data());
+    });
 
-    $("#sex_select select").change(function () {
-        search_table($(this).val(), 1);
-    });
-    $("#role_select select").on("change", function () {
-        search_table($(this).val(), 2);
-    });
-    $("#all_select input").keyup(function () {
-        search_table($(this).val());
-    });
 });
 </script>
 {% endblock %}
