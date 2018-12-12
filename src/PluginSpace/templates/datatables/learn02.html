@@ -73,7 +73,8 @@ $(document).ready(function () {
         },
         searchDelay: 350,
         search: {
-            "regex": true
+            regex: true,
+            smart: false
         },
         scrollX: true,
         scrollCollapse: true,
@@ -118,7 +119,7 @@ $(document).ready(function () {
     });
     $("#multi_search").click(function () {
         table
-            .columns(2)
+            //.columns(2)
             .search("DEVELOPER" || "SE")
             .draw();
 
