@@ -10,3 +10,5 @@ https://github.com/vuejs/vue/
 http://plugins.krajee.com/file-input#installation 
 Manual Install
 
+https://github.com/davidstutz/bootstrap-multiselect
+
