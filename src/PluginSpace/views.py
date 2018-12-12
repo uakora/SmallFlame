@@ -49,3 +49,10 @@ def datatable_data_year(request):
 
         data.append(item)
     return HttpResponse(json.dumps({'data': data}))
+
+def multiselect_learn01(request):
+    roles = [
+        {'id': -1, 'name': 'LM'}, {'id': 0, 'name': 'PM'}, {'id': 1, 'name': 'SE'}, {'id': 2, 'name': 'MDE'},
+        {'id': 3, 'name': 'DEVELOPER'}, {'id': 4, 'name': 'TEST'}
+    ]
+    return render(request, 'multiselect/learn01.html', {'roles': roles})

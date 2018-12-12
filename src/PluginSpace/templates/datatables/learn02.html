@@ -57,6 +57,7 @@
                 <input class="form-control" type="text" style="display: inline-block; width: 250px;">
             </div>
         </div>
+        <button id="multi_search" class="btn btn-success" type="button">搜索角色：SE、DEVELOPER</button>
 
         {% endblock %}
     </div>
@@ -71,6 +72,9 @@ $(document).ready(function () {
             url: "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
         },
         searchDelay: 350,
+        search: {
+            "regex": true
+        },
         scrollX: true,
         scrollCollapse: true,
         ajax: "/plugins/datatable/data/year",
@@ -111,6 +115,14 @@ $(document).ready(function () {
     });
     $("#all_select input").keyup(function () {
         search_table($(this).val());
+    });
+    $("#multi_search").click(function () {
+        table
+            .columns(2)
+            .search("DEVELOPER" || "SE")
+            .draw();
+
+        //table.search("SE" + " " + "DEVELOPER").draw();
     });
 });
 </script>

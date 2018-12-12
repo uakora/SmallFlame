@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+{% endblock %}
+{% block js %}
+    <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'multiselect_left_nav_bar.html' with active_idx=0  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <pre>{{ roles }}</pre>
+        <label>角色</label>
+        <select id="role_select" multiple="multiple">
+        {% for role in roles %}
+        <option value="{{ role.name }}" selected>{{ role.name }}</option>
+        {% endfor %}
+
+        </select>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#role_select").multiselect ({
+        buttonWidth: "350px",
+        disableIfEmpty: true,
+        disabledText: "已禁用",
+        onInitialized: function(select, container){
+            console.log($(select).val());
+        },
+        onChange: function (option, checked) {
+            console.log($(option).val(), checked);
+            console.log($("#role_select").val());
+        }
+    });
+});
+</script>
+{% endblock %}
+

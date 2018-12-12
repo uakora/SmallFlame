@@ -8,4 +8,6 @@ urlpatterns = [
     path('datatable/learn03/', views.datatable_learn03, name='datatable'),
 
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
+
+    path('multiselect/learn01/', views.multiselect_learn01, name='multiselect'),
 ]
