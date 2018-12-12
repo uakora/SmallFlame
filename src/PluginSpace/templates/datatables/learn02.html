@@ -73,8 +73,8 @@ $(document).ready(function () {
         },
         searchDelay: 350,
         search: {
-            regex: true,
-            smart: false
+            //regex: true,
+            smart: true
         },
         scrollX: true,
         scrollCollapse: true,
@@ -102,10 +102,15 @@ $(document).ready(function () {
 
     function search_table(value, idx){
         if(idx) {
-            table.columns(idx).search(value).draw();
+            //table.columns(idx).search(value).draw();
+            table.column(idx).search(value).draw();
             return
         }
-        table.search(value).draw();
+        console.log(value);
+        {#regExSearch = '^\\s' + value +'\\s*$';#}
+        {#table.search(regExSearch, true, false).draw();#}
+        var val = $.fn.dataTable.util.escapeRegex(value);
+        table.search( val ? '^' + val +'$' : '', true, false ).draw();
     }
 
     $("#sex_select select").change(function () {
@@ -118,12 +123,13 @@ $(document).ready(function () {
         search_table($(this).val());
     });
     $("#multi_search").click(function () {
+        /*
         table
             //.columns(2)
-            .search("DEVELOPER" || "SE")
+            .search("DEVELOPER" + " " + "SE")
             .draw();
-
-        //table.search("SE" + " " + "DEVELOPER").draw();
+        */
+        table.search("SE" + " " + "DEVELOPER", false, true).draw();
     });
 });
 </script>
