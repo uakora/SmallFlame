@@ -1,0 +1,123 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+{% endblock %}
+{% block js %}
+    <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=3  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+
+        <table id="example" class="table table-hover table-bordered" style="width: 100%;">
+            <thead>
+            <tr>
+                {% for foo in table_head %}
+                <th>{{ foo }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; margin: 25px 0;">
+            <div id="sex_select">
+                <label>性别（列搜索）&nbsp;</label>
+                <select class="form-control" style="display: inline-block; width: 250px;">
+                    <option value=""></option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div id="role_select">
+                <label>角色（列搜索）&nbsp;</label>
+                <select class="form-control" style="display: inline-block; width: 250px;">
+                    <option value=""></option>
+                    <option value="LM">LM</option>
+                    <option value="PL">PL</option>
+                    <option value="SE">SE</option>
+                    <option value="MDE">MDE</option>
+                    <option value="DEVELOPER">DEVELOPER</option>
+                    <option value="TEST">TEST</option>
+                </select>
+            </div>
+            <div id="all_select">
+                <label>全局搜索&nbsp;</label>
+                <input class="form-control" type="text" style="display: inline-block; width: 250px;">
+            </div>
+        </div>
+        <button class="btn btn-sm btn-success" type="button">LM SE DEVELOPER</button>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="/static/js/tools.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    var table = $("#example").DataTable({
+        language: {
+            url: "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
+        },
+        searchDelay: 350,
+        scrollX: true,
+        scrollCollapse: true,
+        ajax: "/plugins/datatable/data/year",
+        columns: [
+            {data: "name"},
+            {data: "sex"},
+            {data: "role"},
+            {data: "year_total"},
+            {data: "month_avg"},
+            {data: "code_enum.0", orderable: false},
+            {data: "code_enum.1", orderable: false},
+            {data: "code_enum.2", orderable: false},
+            {data: "code_enum.3", orderable: false},
+            {data: "code_enum.4", orderable: false},
+            {data: "code_enum.5", orderable: false},
+            {data: "code_enum.6", orderable: false},
+            {data: "code_enum.7", orderable: false},
+            {data: "code_enum.8", orderable: false},
+            {data: "code_enum.9", orderable: false},
+            {data: "code_enum.10", orderable: false},
+            {data: "code_enum.11", orderable: false}
+        ]
+    });
+    $(".btn-success").click(function () {
+        var arr = ["LM", "DEVELOPER", "SE"];
+        var brr = [];
+        arr.forEach(function (v) {
+            brr.push($.fn.dataTable.util.escapeRegex(v));
+        });
+        var text = brr.join("|");
+        //var regExSearch = '^\\s' + myValue +'\\s*$';
+        var regExSearch = '^(' + text +')$';
+        console.log(regExSearch);
+        table.column(2).search(regExSearch, true, false).draw();
+        var idx = [];
+        var filteredData = table.column(2).data().filter(function (value, index) {
+            if(value == "LM" || value == "SE"){
+                idx.push(index);
+            }
+            return value == "LM" || value == "SE";
+        });
+        console.log(filteredData);
+        console.log(idx.join(" "));
+    });
+});
+
+</script>
+{% endblock %}
+

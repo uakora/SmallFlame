@@ -21,6 +21,12 @@ def datatable_learn03(request):
                   'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.']
     return render(request, 'datatables/learn03.html', {'table_head': table_head})
 
+def datatable_learn04(request):
+    table_head = ['姓名', '性别', '角色', '全年', '月均',
+                  'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.',
+                  'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.']
+    return render(request, 'datatables/learn04.html', {'table_head': table_head})
+
 def datatable_data_year(request):
     names = ['Abbie', 'Joe', 'Darwin', 'Eilian', 'David', 'Ken', 'Joseph', 'Duke', 'Eric', 'Luke', 'Evan',
              'Denny', 'Johnny', 'Joe', 'Leo', 'Benjamin', 'Alysa', 'Gary', 'Mark', 'Michael', 'Blake', 'George',
