@@ -57,8 +57,6 @@
                 <input class="form-control" type="text" style="display: inline-block; width: 250px;">
             </div>
         </div>
-        <button id="multi_search" class="btn btn-success" type="button">搜索角色：SE、DEVELOPER</button>
-
         {% endblock %}
     </div>
 </div>
@@ -102,15 +100,10 @@ $(document).ready(function () {
 
     function search_table(value, idx){
         if(idx) {
-            //table.columns(idx).search(value).draw();
             table.column(idx).search(value).draw();
             return
         }
-        console.log(value);
-        {#regExSearch = '^\\s' + value +'\\s*$';#}
-        {#table.search(regExSearch, true, false).draw();#}
-        var val = $.fn.dataTable.util.escapeRegex(value);
-        table.search( val ? '^' + val +'$' : '', true, false ).draw();
+        table.search( value).draw();
     }
 
     $("#sex_select select").change(function () {
@@ -122,15 +115,7 @@ $(document).ready(function () {
     $("#all_select input").keyup(function () {
         search_table($(this).val());
     });
-    $("#multi_search").click(function () {
-        /*
-        table
-            //.columns(2)
-            .search("DEVELOPER" + " " + "SE")
-            .draw();
-        */
-        table.search("SE" + " " + "DEVELOPER", false, true).draw();
-    });
+
 });
 </script>
 {% endblock %}
