@@ -1,0 +1,39 @@
+{% extends 'css_index.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/CssSpace/temp.css">
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'css_index_left_nav_bar.html' with active_idx=2  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="checkbox">
+                <span>AAAA</span>
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="checkbox style-2">
+                <span>BBBB</span>
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="checkbox style-3">
+                <span>CCCC</span>
+            </label>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+

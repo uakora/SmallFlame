@@ -2,17 +2,17 @@ input[type=checkbox]{
     /*visibility: hidden;*/
     display: none;
 }
-#color-input-red + label{
-    display: block;
+input.cb-input + span{
+    display: inline-block;
+    text-align: center;
     width: 20px;
     height: 20px;
     cursor: pointer;
     background-color: rgba(240,84,77,1);
 }
-#color-input-red:checked + label::before{
-    display: block;
+input.cb-input:checked + span::before{
+    display: inline-block;
     content: "\2714";
-    text-align: center;
     font-size: 16px;
     color: #FFFFFF;
 }
