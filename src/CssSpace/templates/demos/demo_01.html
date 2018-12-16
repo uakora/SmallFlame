@@ -1,0 +1,28 @@
+{% extends 'css_index.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/CssSpace/demo_01.css">
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'css_index_left_nav_bar.html' with active_idx=0  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <h3>适用图片作为背景实现，只适用一个复选框</h3>
+        <label class="my_protocol">
+            <input class="input_agreement_protocol" type="checkbox">
+            <span></span>
+            同意
+        </label>
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+

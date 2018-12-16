@@ -1,0 +1,24 @@
+{% extends 'css_index.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/CssSpace/demo_02.css">
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'css_index_left_nav_bar.html' with active_idx=1  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <h4>实现效果</h4>
+        <input id="color-input-red" type="checkbox" name="color-input-red" value="AAAA">
+        <label for="color-input-red"></label>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+

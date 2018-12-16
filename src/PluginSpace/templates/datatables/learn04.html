@@ -102,7 +102,6 @@ $(document).ready(function () {
             brr.push($.fn.dataTable.util.escapeRegex(v));
         });
         var text = brr.join("|");
-        //var regExSearch = '^\\s' + myValue +'\\s*$';
         var regExSearch = '^(' + text +')$';
         console.log(regExSearch);
         table.column(2).search(regExSearch, true, false).draw();

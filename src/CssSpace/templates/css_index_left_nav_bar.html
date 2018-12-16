@@ -1,0 +1,15 @@
+<div class="left-nav-title">
+    <i class="fa fa-reorder"></i>CSS示例
+</div>
+<ul class="left-nav-bar">
+    <li>
+        <a href="/css/demo_01">checkbox样式优化（一）</a>
+    </li>
+    <li>
+        <a href="/css/demo_02">checkbox样式优化（二）</a>
+    </li>
+</ul>
+
+<script>
+    $("ul.left-nav-bar > li").eq({{ active_idx }}).find("a:first-child").addClass("active");
+</script>

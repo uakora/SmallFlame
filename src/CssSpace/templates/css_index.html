@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'css_index_left_nav_bar.html' %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block setting_top_nav %}
+<script src="/static/js/CssSpace/index.js"></script>
+{% endblock %}

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.page_home),
     path('plugins/', include('PluginSpace.urls')),
+    path('css/', include('CssSpace.urls')),
 ]

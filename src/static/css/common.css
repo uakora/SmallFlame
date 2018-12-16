@@ -17,7 +17,8 @@ body{
 .flame-container{
     width: 100%;
     /*max-width: 1260px;*/
-    max-width: 1380px;
+    /*max-width: 1380px;*/
+    max-width: 1425px;
     min-width: 755px;
     margin: 0 auto;
     overflow: hidden;

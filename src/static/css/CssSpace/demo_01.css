@@ -1,0 +1,25 @@
+label.my_protocol{
+    cursor: pointer;
+}
+/* 隐藏默认的checkbox */
+.my_protocol .input_agreement_protocol{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    display: none;
+}
+/* 未选中时 */
+.my_protocol .input_agreement_protocol+span{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    background: url("/static/image/CssSpace/icon_checkbox.png") no-repeat;
+    background-position-x: 0;
+    background-position-y: -25px;
+}
+/* 选中时，修改背景图片的位置 */
+.my_protocol .input_agreement_protocol:checked+span{
+    background-position: 0 0;
+}
