@@ -6,4 +6,5 @@ urlpatterns = [
     path('demo_01/', views.css_demo_01, name='css'),
     path('demo_02/', views.css_demo_02, name='css'),
     path('demo_03/', views.css_demo_03, name='css'),
+    path('demo_04/', views.css_demo_04, name='css'),
 ]

@@ -29,6 +29,12 @@
             </tr>
             </thead>
         </table>
+        <div>
+        <pre id="select_row"></pre>
+        </div>
+        <div id="div_excel">
+
+        </div>
         {% endblock %}
     </div>
 </div>
@@ -41,6 +47,13 @@ $(document).ready(function () {
         language: {
             url: "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
         },
+        //dom: 'B<"clear">lfrtip',
+        //dom: 'B<"clear">frtip',
+        /*
+        buttons: [
+            "copy", "excel", "pdf"
+        ],
+        */
         searchDelay: 350,
         scrollX: true,
         scrollCollapse: true,
@@ -65,12 +78,24 @@ $(document).ready(function () {
             {data: "code_enum.11", orderable: false}
         ]
     });
+    new $.fn.dataTable.Buttons(table, {
+        buttons: ['excel']
+    });
+    table.buttons().container().appendTo($("#div_excel", table.table().container()) )
 
     $("#example tbody").on("click", "tr", function () {
-        //console.log("AAAAAAAA");
-        //$(this).toggleClass("selectd");
-        //console.log(table.rows('.selected').data());
-        console.log(table.row(this).data());
+        var txt = table.row(this).data();
+        console.log(txt);
+        $("#select_row").text(txt.name + " " +txt.sex + " " +txt.role);
+    });
+
+    $("#btn_excel").click(function () {
+        var excel = new $.fn.dataTable.Buttons(table, {
+            buttons: ['excel']
+        });
+
+        console.log(excel);
+
     });
 
 });

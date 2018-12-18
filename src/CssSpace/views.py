@@ -12,3 +12,6 @@ def css_demo_02(request):
 
 def css_demo_03(request):
     return render(request, 'demos/demo_03.html')
+
+def css_demo_04(request):
+    return render(request, 'demos/demo_04.html')

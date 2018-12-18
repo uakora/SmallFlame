@@ -1,0 +1,65 @@
+{% extends 'css_index.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/CssSpace/temp.css">
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'css_index_left_nav_bar.html' with active_idx=3  %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <!-- 设置border="1"以显示表格框线 -->
+        <table border="1" style="border-collapse: collapse;">
+            <!-- caption元素可以生成表标题，其单元格列跨度为表格的列数 -->
+            <caption>学生成绩表</caption>
+            <tr>
+                <!-- 可以使用rowspan和colspan来合并单元格 -->
+                <th rowspan="2">编号</th>
+                <th rowspan="2">学号</th>
+                <th rowspan="2">姓名</th>
+                <th rowspan="2">性别</th>
+                <th rowspan="2">年龄</th>
+                <th colspan="3">成绩</th>
+            </tr>
+            <tr>
+                <th>语文</th>
+                <th>数学</th>
+                <th>英语</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2016001</td>
+                <td>张三</td>
+                <td>男</td>
+                <td>13</td>
+                <td>85</td>
+                <td>94</td>
+                <td>77</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2016002</td>
+                <td>李四</td>
+                <td>女</td>
+                <td>12</td>
+                <td>96</td>
+                <td>84</td>
+                <td>89</td>
+            </tr>
+        </table>
+        <a>导出数据</a>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="/static/js/JsSpace/demo01.js"></script>
+{% endblock %}
+
+
