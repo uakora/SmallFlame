@@ -57,7 +57,9 @@
                 <input class="form-control" type="text" style="display: inline-block; width: 250px;">
             </div>
         </div>
-        <button class="btn btn-sm btn-success" type="button">LM SE DEVELOPER</button>
+        <div id="tool_footer">
+            <button class="btn btn-sm btn-success" type="button">角色属于：LM SE DEVELOPER</button>
+        </div>
         {% endblock %}
     </div>
 </div>
@@ -95,6 +97,24 @@ $(document).ready(function () {
             {data: "code_enum.11", orderable: false}
         ]
     });
+
+    function createExportExcelButton(){
+        new $.fn.dataTable.Buttons(table, {
+           buttons: [
+               {
+                   extend: 'excelHtml5',
+                   text: '导出',
+                   title: 'CheckIn统计分析',
+                   className: 'btn btn-sm btn-danger',
+                   extension: '.xlsx'
+               }
+           ]
+        });
+        table.buttons().container()
+            .appendTo($("#tool_footer"));
+    }
+    createExportExcelButton();
+
     $(".btn-success").click(function () {
         var arr = ["LM", "DEVELOPER", "SE"];
         var brr = [];
