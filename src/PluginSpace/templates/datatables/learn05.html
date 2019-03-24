@@ -51,6 +51,10 @@
 
 {% block custom_js %}
 <script type="text/javascript">
+function edit_status(id){
+    console.log("the id of MR is: ", id);
+}
+
 $(document).ready(function () {
     var mr_table = $("#mr_table").DataTable({
         language: {
