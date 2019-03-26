@@ -45,6 +45,9 @@
                 </thead>
             </table>
         </div>
+        <div>
+            <button id="clear_dt_state" class="btn btn-sm btn-success" type="button">清除状态</button>
+        </div>
         <section style="display: none;">
             <div class="edit-button-box">
                 <button class="btn btn-xs btn-default edit-button"><i class="fa fa-edit"></i></button>
@@ -54,7 +57,7 @@
                 <button class="btn btn-xs btn-danger cancel-button"><i class="fa fa-times"></i></button>
             </div>
             <div class="mr-status-select">
-                <select>
+                <select class="form-control input-sm">
                     <option value="未确认">未确认</option>
                     <option value="已确认">已确认</option>
                     <option value="已合入">已合入</option>
@@ -79,6 +82,24 @@ $(document).ready(function () {
         autoWidth: true,
         scrollX: true,
         scrollCollapse: true,
+        stateSave: true,
+        stateSaveParams: function(settings, data) {
+            console.log("stateSaveParams");
+        },
+        stateSaveCallback: function(settings, data) {
+            console.log("stateSaveCallback");
+        },
+        stateLoadParams: function(settings, data) {
+            console.log("stateLoadParams");
+        },
+        /*
+        stateLoadCallback: function(settings, callback) {
+            console.log("stateLoadCallback");
+        },
+        */
+        stateLoaded: function(settings, data) {
+            console.log("stateLoaded");
+        },
         ajax: "/plugins/datatable/learn05/data",
         columns: [
             {
@@ -156,7 +177,14 @@ $(document).ready(function () {
         ]
     });
 
-
+    $("#clear_dt_state").click(function () {
+        mr_table.ajax.reload(null, false);
+        /*
+        console.log("AAAAAAAAAA");
+        mr_table.state.clear();
+        window.location.reload();
+        */
+    });
 
 });
 
