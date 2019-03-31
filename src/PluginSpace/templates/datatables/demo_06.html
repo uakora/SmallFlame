@@ -109,7 +109,7 @@ $(document).ready(function () {
     }
     function format_log(){
         var logs = get_logs();
-        var html_str = "";
+        var html_str = "<p>日志信息：</p>";
         var $dom = $(".log-details").clone();
         logs.forEach(function (log) {
             $dom.children("span.log-time").text(log["modify_time"]);
