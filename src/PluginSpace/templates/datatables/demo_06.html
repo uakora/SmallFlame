@@ -41,6 +41,7 @@
                         <th>Position</th>
                         <th>Office</th>
                         <th>Salary</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
             </table>
@@ -81,6 +82,12 @@ $(document).ready(function () {
             {"data": "position"},
             {"data": "office"},
             {"data": "salary"},
+            {
+                "data": null,
+                "render": function (data, type, row, meta) {
+                    return '<button class="btn btn-xs btn-danger btn-remove"><i class="fa fa-trash-o"></i></button>';
+                }
+            }
         ]
     });
 
@@ -115,27 +122,35 @@ $(document).ready(function () {
         return html_str;
     }
 
-    $("#example tbody").on("click", "td.details-control", function () {
-        $(dt_table.table().container()).addClass("selectable");
-        $(dt_table.table().body()).addClass("highlight");
+    $("#example tbody")
+        .on("click", "td.details-control", function () {
+            $(dt_table.table().container()).addClass("selectable");
+            $(dt_table.table().body()).addClass("highlight");
 
-        var cur_tr = $(this).closest("tr");
-        var cur_row = dt_table.row(cur_tr);
-        var row_open = dt_table.row(".shown");
-        if(row_open.index() && row_open.index() != cur_row.index()){
-            row_open.child.hide();
-            $(dt_table.table().body()).children("tr.shown").removeClass("shown");
-        }
+            var cur_tr = $(this).closest("tr");
+            var cur_row = dt_table.row(cur_tr);
+            var row_open = dt_table.row(".shown");
+            if(row_open.index() && row_open.index() != cur_row.index()){
+                row_open.child.hide();
+                $(dt_table.table().body()).children("tr.shown").removeClass("shown");
+            }
 
-        if(cur_row.child.isShown()){
-            cur_row.child.hide();
-        }else {
-            console.log("++++",cur_row.data());
-            var tr_details = format_log();
-            cur_row.child(tr_details).show();
-        }
-        cur_tr.toggleClass("shown")
-    });
+            if(cur_row.child.isShown()){
+                cur_row.child.hide();
+            }else {
+                console.log("++++",cur_row.data());
+                var tr_details = format_log();
+                cur_row.child(tr_details).show();
+            }
+            cur_tr.toggleClass("shown")
+        })
+        .on("click", "button.btn-remove", function () {
+            var tr = $(this).closest("tr");
+            var row = dt_table.row(tr);
+            row.remove().draw();
+        })
+
+
 });
 
 </script>
