@@ -11,6 +11,7 @@ urlpatterns = [
     path('datatable/learn05/data', views.datatable_learn05_data, name='datatable'),
 
     path('datatable/demo/06', views.datatable_demo_06, name='datatable'),
+    path('datatable/demo/06/log/data/', views.dt_demo_06_logs),
 
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
 

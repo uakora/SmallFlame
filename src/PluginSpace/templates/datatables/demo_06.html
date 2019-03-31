@@ -13,6 +13,9 @@
         tr.shown td.details-control {
             background: url('/static/image/PluginSpace/demo_06/details_close.png') no-repeat center center;
         }
+        .log-details {
+            text-align: left;
+        }
     </style>
 {% endblock %}
 {% block js %}
@@ -44,7 +47,12 @@
         </div>
 
         <section style="display: none">
-
+            <div class="log-details">
+                <span class="log-time">2019-03-31 21:43:43</span>
+                <span class="log-user">张三 lwx454367</span>
+                <span class="log-status">已同步</span>
+                <span class="log-reason">MR.343 MR.32432</span>
+            </div>
         </section>
         {% endblock %}
     </div>
@@ -76,15 +84,43 @@ $(document).ready(function () {
         ]
     });
 
+    function get_logs(){
+        var logs = {};
+        $.ajax({
+            "url": "/plugins/datatable/demo/06/log/data/",
+            "method": "GET",
+            "dataType": "json",
+            "async": false,
+            "success": function (data) {
+                if(data.code == 200){
+                    logs = data.logs;
+                }
+            }
+        });
+
+        return logs;
+    }
+    function format_log(){
+        var logs = get_logs();
+        var html_str = "";
+        var $dom = $(".log-details").clone();
+        logs.forEach(function (log) {
+            $dom.children("span.log-time").text(log["modify_time"]);
+            $dom.children("span.log-user").text(log["modify_user_sn"] + " " + log["modify_user_name"]);
+            $dom.children("span.log-status").text(log["modify_status"]);
+            $dom.children("span.log-reason").text(log["modify_reason"]);
+
+            html_str += $dom[0].outerHTML;
+        });
+        return html_str;
+    }
+
     $("#example tbody").on("click", "td.details-control", function () {
         $(dt_table.table().container()).addClass("selectable");
         $(dt_table.table().body()).addClass("highlight");
 
-
-
         var cur_tr = $(this).closest("tr");
         var cur_row = dt_table.row(cur_tr);
-
         var row_open = dt_table.row(".shown");
         if(row_open.index() && row_open.index() != cur_row.index()){
             row_open.child.hide();
@@ -94,7 +130,8 @@ $(document).ready(function () {
         if(cur_row.child.isShown()){
             cur_row.child.hide();
         }else {
-            var tr_details = "<h4>行详细信息</h4>"
+            console.log("++++",cur_row.data());
+            var tr_details = format_log();
             cur_row.child(tr_details).show();
         }
         cur_tr.toggleClass("shown")

@@ -5,6 +5,7 @@ import time
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+
 def plugin_space_index(request):
     return render(request, 'index.html')
 
@@ -64,6 +65,24 @@ def datatable_learn05_data(request):
 def datatable_demo_06(request):
     return render(request, 'datatables/demo_06.html')
 
+
+def dt_demo_06_logs(request):
+
+    user_sn_list = ['lwx372241', 'cwx665544', 'zwx123456', 'swx346521', 'wwx768932']
+    user_name_list = ['系统同步更新', '李四', '蔡丽', '张三', '孙六', '王五']
+    status_list = ['未确认', '已确认', '已合入', '未合入', '无需合入']
+    reason_list = ['', '备注一,....', '备注二,....', '备注三,....', '备注四,....']
+    logs = []
+    for i in range(10):
+        num = random.randint(0, 4)
+        item = {}
+        item["modify_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+        item["modify_user_sn"] = user_sn_list[num]
+        item["modify_user_name"] = user_name_list[num]
+        item["modify_status"] = status_list[num]
+        item["modify_reason"] = reason_list[num]
+        logs.append(item)
+    return HttpResponse(json.dumps({"logs": logs, "code": 200}))
 
 def datatable_data_year(request):
     names = ['Abbie', 'Joe', 'Darwin', 'Eilian', 'David', 'Ken', 'Joseph', 'Duke', 'Eric', 'Luke', 'Evan',
