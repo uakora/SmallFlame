@@ -17,8 +17,12 @@
     <li>
         <a href="/plugins/datatable/learn05">行编辑、下拉</a>
     </li>
+    <li>
+        <a href="/plugins/datatable/demo/06">行折叠与展开</a>
+    </li>
 </ul>
 
 <script>
-    $("ul.left-nav-bar > li").eq({{ active_idx }}).find("a:first-child").addClass("active");
+    var index = "{{ active_idx | safe }}";
+    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
 </script>

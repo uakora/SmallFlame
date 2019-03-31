@@ -60,6 +60,11 @@ def datatable_learn05_data(request):
 
     return HttpResponse(json.dumps({"data": data}))
 
+
+def datatable_demo_06(request):
+    return render(request, 'datatables/demo_06.html')
+
+
 def datatable_data_year(request):
     names = ['Abbie', 'Joe', 'Darwin', 'Eilian', 'David', 'Ken', 'Joseph', 'Duke', 'Eric', 'Luke', 'Evan',
              'Denny', 'Johnny', 'Joe', 'Leo', 'Benjamin', 'Alysa', 'Gary', 'Mark', 'Michael', 'Blake', 'George',
