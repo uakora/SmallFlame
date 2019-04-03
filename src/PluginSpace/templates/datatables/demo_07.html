@@ -46,7 +46,7 @@
             <table id="example" class="table table-striped" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th style="width: 20px;">Name</th>
                         <th>Position</th>
                         <th>Office</th>
                         <th>Salary</th>
@@ -89,8 +89,9 @@ $(document).ready(function () {
         "lengthMenu": [[10, 25, 50, 100, -1], ["10条/页", "25条/页", "50条/页", "100条/页", "全部"]],
         "dom": 'ft<"dt-footer-tool" pli>',
         "ajax": "/static/data/objects.txt",
+        "autoWidth": false,
         "columns": [
-            {"data": "name"},
+            {"data": "name", },
             {"data": "position"},
             {"data": "office"},
             {"data": "salary"}
