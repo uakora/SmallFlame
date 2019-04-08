@@ -74,6 +74,10 @@ def datatable_demo_08(request):
     return render(request, 'datatables/demo_08.html')
 
 
+def datatable_demo_09(request):
+    return render(request, 'datatables/demo_09.html')
+
+
 def dt_demo_06_logs(request):
 
     user_sn_list = ['lwx372241', 'cwx665544', 'zwx123456', 'swx346521', 'wwx768932']
