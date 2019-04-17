@@ -1,0 +1,20 @@
+{
+    "data":[
+        {"name_cn":"辰逸", "name_py":"lilinhao", "age":"24", "sex":"男", "group": "A"},
+        {"name_cn": "浩宇", "name_py": "haoyu", "age": 16, "sex": "男", "group": "AA"},
+        {"name_cn": "瑾瑜", "name_py": "jinyu", "age": 21, "sex": "男", "group": "A"},
+        {"name_cn": "皓轩", "name_py": "haoxuan", "age": 32, "sex": "男", "group": "AAA"},
+        {"name_cn": "擎苍", "name_py": "qingcang", "age": 19, "sex": "男", "group": "AA"},
+        {"name_cn": "雨泽", "name_py": "yuze", "age": 13, "sex": "男", "group": "AA"},
+        {"name_cn": "晟睿", "name_py": "shengrui", "age": 31, "sex": "男", "group": "A"},
+        {"name_cn": "烨磊", "name_py": "yelei", "age": 26, "sex": "男", "group": "B"},
+        {"name_cn": "致远", "name_py": "zhiyuan", "age": 24, "sex": "男", "group": "BB"},
+        {"name_cn": "灵芸", "name_py": "lingyuan", "age": 27, "sex": "女", "group": "BBB"},
+        {"name_cn": "茹雪", "name_py": "ruxue", "age": 28, "sex": "女", "group": "C"},
+        {"name_cn": "语嫣", "name_py": "yuyan", "age": 21, "sex": "女", "group": "CC"},
+        {"name_cn": "漫妮", "name_py": "manni", "age": 22, "sex": "女", "group": "CC"},
+        {"name_cn": "惠茜", "name_py": "huixi", "age": 29, "sex": "女", "group": "CCC"},
+        {"name_cn": "雅静", "name_py": "yajing", "age": 31, "sex": "女", "group": "A"},
+        {"name_cn": "梦璐", "name_py": "menglu", "age": 22, "sex": "女", "group": "B"}
+    ]
+}
