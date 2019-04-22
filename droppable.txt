@@ -1,0 +1,762 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/easyvalidator/css/validate.css">
+<style type="text/css">
+  .group-navigation{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .group-navigation li{
+    color: #7d7d7d;
+    padding: 5px 10px;
+    border: 1px solid #a8a8a8;
+    margin-left: -1px;
+    display: inline-block;
+    line-height: 20px;
+  }
+  .group-navigation li:hover{
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #5194ec;
+    border: 1px solid #5194ec;
+  }
+  .group-navigation-li-active{
+    cursor: pointer;
+    color: #ffffff!important;
+    background-color: #5194ec;
+    border: 1px solid #5194ec !important;
+  }
+  .add{
+    position: relative;
+    top: 3px;
+    line-height: 20px!important;
+    margin-left: 10px !important;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5px 7px!important;
+    border-radius: 2px !important;
+  }
+  .add:hover{
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #5194ec;
+    border: 1px solid #5194ec;
+  }
+  .border-left-radius{
+    border-radius: 2px 0px 0px 2px!important;
+  }
+  .border-right-radius{
+    border-radius: 0px 2px 2px 0px!important;
+  }
+  .group-top{
+    background-color: #D9E7FF;
+    height: 40px;
+    padding: 0 20px;
+    line-height: 40px;
+    color: #7d7d7d;
+  }
+  .group-name{
+    float: left;
+    font-size: 18px;
+  }
+  .group-btn{
+    float: right;
+  }
+  .group{
+    margin-top: 10px;
+    border:1px solid #DBDBDB;
+    border-radius: 2px!important;
+  }
+  .col-sm-2{
+    width: auto!important;
+  }
+  .group-content{
+    padding: 30px;
+    color: #7d7d7d;
+  }
+  .group-domain{
+    margin-bottom: 15px;
+  }
+  .group-domain-name{
+    padding: 0 15px;
+    white-space: nowrap;
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .group-domain-user{
+    background-color: #E4E4E4;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 2px 7px;
+    display: inline-block;
+
+  }
+  .group-domain-user:hover{
+    cursor: pointer;
+    background-color: #939393;
+    color: #ffffff;
+  }
+  .group-domain-add{
+    background-color: #E4E4E4;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 2px 20px;
+    display: inline-block;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px
+  }
+  .group-domain-members{
+    padding: 0px;
+    margin-top: -5px;
+  }
+
+  .add-domain{
+    color: #7d7d7d;
+    border: 1px solid #a8a8a8;
+    width: 22.5%;
+    display: inline-block;
+    height: 24px;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+  .add-domain > input{
+    width: calc(100% - 20px);
+    padding-left: 5px;
+    border: none;
+    border-right: 1px solid #a8a8a8;
+    outline: none;
+    height: 100%;
+  }
+   .add-domain > span{
+    text-align: center;
+    display: inline-block;
+    width: 20px;
+    cursor: pointer;
+  }
+  .add-domain-btn{
+    color: #7d7d7d;
+    border: 1px solid #a8a8a8;
+    width: 22.5%;
+    display: inline-block;
+    height: 24px;
+    line-height: initial;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+  .add-title{
+    padding-left: 5px;
+    margin-left: 5px;
+    outline: none;
+  }
+  input{
+    color: #7d7d7d;
+  }
+  .group-select{
+    width: calc(50% - 10px)!important;
+    float: left;
+  }
+  .ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1060;
+  }
+  .input_validation-failed {
+    border: 2px solid #FF0000 !important;
+    color: red !important;
+  }
+.scrollbar-style{
+   overflow-y: auto;
+}
+/* 滑块颜色 */
+.scrollbar-style::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+}
+
+.scrollbar-style::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+}
+/* 滚动条的滑轨背景颜色 */
+.scrollbar-style::-webkit-scrollbar-track {
+    border-radius: 3px;
+    /* background-color: rgba(174, 188, 203, 0.2) !important; */
+}
+.scrollbar-style::-webkit-scrollbar-corner {
+    display: none;
+}
+</style>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="/static/easyvalidator/js/easyvalidator.js" role="reload"></script>
+<script type="text/javascript" charset="utf-8">
+    var active_module = "";
+    var groups_manage = [{id:"-1", value: "全部"}];
+    var group_name = "全部";
+    var modal_content_default = "";
+    var group_info = [];
+    var users = {{owner | safe}}
+
+    $(document).ready(function(){
+        $("#add_modal_body").css("max-height", window.innerHeight*0.8 + "px");
+        modal_content_default = $("#group_modal_page").html();
+        group_info = {{data | safe}};
+        group_info.forEach(function(group, index){
+            groups_manage.push(group.group);
+        })
+        init_group_navigation(groups_manage);
+        $( "div[role='draggable']" ).draggable({
+            scroll: true,
+            containment: "#group_mange_draggable",
+            revert: true,
+            stack: "div[role='draggable']",
+            cursorAt: { top: 15, left: 70 },
+            start: function(event) {
+            },
+            drag: function(event) {
+            },
+            stop: function(event) {
+            }
+        });
+
+        $("div.group-domain-members").droppable({
+            over: function(event,ui) {
+                var target = $(event.target);
+                target.css("background-color","#EDF4FD");
+            },
+            out: function(event,ui){
+                var target = $(event.target);
+                target.css("background-color","transparent");
+            },
+            drop: function(event,ui){
+                var target = $(event.target);
+                target.css("background-color","transparent");
+                var add_member_param = {};
+                add_member_param.member  = $(ui.draggable.find("span")[0]).text();
+                add_member_param.group_id = target.parent().parent().parent().find("div.group-top").find("div.group-name").find("span").attr("id");
+                add_member_param.domain_id = target.prev().find("span").attr("id");
+
+                var delete_member_param = {};
+                delete_member_param.member  = $(ui.draggable.find("span")[0]).text();
+                delete_member_param.group_id = ui.draggable.parent().parent().parent().parent().find("div.group-top").find("div.group-name").find("span").attr("id");
+                delete_member_param.domain_id = ui.draggable.parent().prev().find("span").attr("id");
+                if(ui.draggable.parent()[0] != target[0]){
+                    target_drop(delete_member_param, add_member_param).then(function(){
+                        target.find("div.group-domain-add").before(ui.draggable);
+                    });
+                }
+            },
+        })
+
+        if(!window.name){
+            window.name = "group_manage";
+        }else{
+            var curr_group = window.sessionStorage.getItem("group_name");
+            if(curr_group){
+                $("#group_navigation").find("li").each(function(index, li){
+                   if($(li).text() == curr_group){
+                       $(li).click();
+                   }
+                })
+            }
+        }
+
+        $("div.panel-body").css("display", "block");
+    })
+
+    function target_drop(delete_member_param, add_member_param){
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                type: 'POST',
+                url: '/domain/user/delete/',
+                dataType: 'json',
+                data: delete_member_param,
+                async: false,
+                success: function(data){
+                    add_member(null, add_member_param).then(function(){
+                        resolve(true);
+                    });
+                },
+            })
+        })
+    }
+
+    $(window).resize(function(){
+        $("#add_modal_body").css("max-height", window.innerHeight*0.85 + "px");
+    })
+
+    function reload_valid_js(){
+        var script = $("script[role=reload]").remove();
+        var head = $("head");
+        head.append(script);
+    }
+
+    function init_group_navigation(groups){
+        groups.forEach(function(group, index){
+            var li = $("<li></li>");
+            li.on("click", function(){
+                $("#group_navigation").find("li").removeClass("group-navigation-li-active");
+                $(this).addClass("group-navigation-li-active");
+                show_group_detail(group.value);
+            })
+            if(index == 0){
+                li.addClass("border-left-radius group-navigation-li-active");
+            }else if(index == groups.length - 1){
+                li.addClass("border-right-radius");
+            }
+            li.text(group.value);
+            $("#group_navigation").append(li);
+        })
+        $("#group_navigation").append('<li class="add" onclick="show_add_page()" title="新增责任组">+</li>');
+    }
+
+    function show_group_detail(group){
+        group_name = group;
+        window.sessionStorage.setItem("group_name", group);
+        if(group == "全部"){
+            $("div.group").css("display", "block");
+        }else{
+            $("div.group").css("display", "none");
+            var divs = $("div.group-name");
+            divs.each(function(index, div){
+                if($(div).find("span").text() == group){
+                    $(div).parent().parent().css("display", "block");
+                }
+            })
+        }
+    }
+
+    function show_add_page(){
+        $("#group_modal_page").html(modal_content_default);
+        $("#group_edit").css("display", "none");
+        $("#group_add").css("display", "inline-block");
+        reload_valid_js();
+        $("#group_modal_page").modal("show");
+    }
+
+    function show_edit_page(group_id, group_value){
+        $("#group_modal_page").html(modal_content_default);
+        $("#group_edit").css("display", "inline-block");
+        $("#group_add").css("display", "none");
+        init_edit_page(group_id, group_value);
+        reload_valid_js();
+        $("#group_modal_page").modal("show");
+    }
+
+    function init_edit_page(group_id, group_value){
+        $("input[name='group_name']").val(group_value);
+        $("input[name='group_name']").attr("id", group_id);
+        group_info.forEach(function(item, index){
+            if(item.group.value == group_value){
+                var domains =  item.domains;
+                domains.forEach(function(domain, inx){
+                    if(domain.id){
+                        add_domain($("#add_domain_btn")[0], domain);
+                    }
+                })
+            }
+        })
+    }
+
+    var time_id = null;
+    function add_domain(origin, domain){
+        var div = $("<div></div>");
+        div.addClass("add-domain");
+        var input = $("<input>");
+        input.attr("placeholder","请输入领域名");
+        input.attr("name","add_domain");
+        input.attr("valid", "required");
+        input.attr("maxlength", 45);
+        input.attr("errmsg", "不能为空!");
+        if(domain){
+            input.attr("id", domain.id);
+            input.val(domain.value);
+            if(domain.value == "未分组"){
+                div.css("display", "none");
+            }
+        }
+        var span = $("<span></span>");
+        span.text("x");
+        span.on("click", function(){
+            $(this).parent().remove();
+        })
+        div.append(input).append(span);
+        $(origin).before(div);
+        input[0].focus();
+        if(time_id != null){
+            clearTimeout(time_id);
+        }
+        time_id = setTimeout(function(){
+            reload_valid_js();
+        },1000)
+    }
+
+    function show_add_member_page(curr_group, curr_domain){
+        init_add_member_page(curr_group, curr_domain);
+        $("#group_member").autocomplete({
+            source: users
+        });
+        reload_valid_js();
+        $("#member_modal_page").modal("show");
+    }
+
+    function init_add_member_page(curr_group, curr_domain){
+        $("#group_member").val("");
+        if($("#group_member").hasClass("input_validation-failed")){
+            $("#group_member").removeClass("input_validation-failed");
+        }
+        var groups = groups_manage.slice(1);
+        init_select_groups(groups, curr_group, curr_domain);
+    }
+
+    function init_select_groups(groups, curr_group, curr_domain){
+        $("#groups").html("");
+        groups.forEach(function(group, index){
+            var option = $("<option></option>");
+            option.val(group.id);
+            option.text(group.value);
+            if(group.value == curr_group){
+                option.prop("selected", "selected");
+            }
+            $("#groups").append(option);
+        })
+        init_select_domains($("#groups").val(), curr_domain);
+    }
+
+    function init_select_domains(curr_group, curr_domain){
+        var domains = [];
+        group_info.forEach(function(item, index){
+            if(item.group.id == curr_group){
+                domains = item.domains;
+            }
+        })
+        $("#domains").html("");
+        domains.forEach(function(domain, index){
+            var option = $("<option></option>");
+            option.val(domain.id);
+            option.text(domain.value);
+            if(domain.value == curr_domain){
+                option.prop("selected", "selected");
+            }
+            $("#domains").append(option);
+        })
+    }
+
+    function change_group(){
+        var curr_group = $("#groups").val();
+        var curr_domain = $("#domains").val();
+        init_select_domains(curr_group, curr_domain);
+    }
+
+    function delete_group(origin, id){
+         BootstrapDialog.confirmExt('删除确定', '您是否要删除该项目组?',BootstrapDialog.TYPE_DANGER, function(result){
+            if(result){
+                 $(origin).attr("disabled", true);
+                 $.ajax({
+                    type: 'POST',
+                    url: '/user/group/delete/',
+                    dataType: 'json',
+                    data: {id: id},
+                    async: false,
+                    success: function(data){
+                        $(origin).removeAttr("disabled");
+                        show_tip("删除成功", true);
+                        setTimeout(function(){
+                            window.location.reload();
+                        },100)
+                    },
+                    error: function(result){
+                        $(origin).removeAttr("disabled");
+                        show_tip("删除失败");
+                    }
+                })
+            }
+         })
+    }
+
+    function delete_member(origin){
+        BootstrapDialog.confirmExt('删除确定', '您是否要删除该成员?',BootstrapDialog.TYPE_DANGER, function(result){
+            if(result){
+                $(origin).attr("disabled", true);
+                var delete_member_param = {};
+                delete_member_param.member  = $(origin).prev().text();
+                delete_member_param.group_id = $(origin).parent().parent().parent().parent().parent().find("div.group-top").find("div.group-name").find("span").attr("id");
+                delete_member_param.domain_id =$(origin).parent().parent().prev().find("span").attr("id");
+                $.ajax({
+                    type: 'POST',
+                    url: '/domain/user/delete/',
+                    dataType: 'json',
+                    data: delete_member_param,
+                    async: false,
+                    success: function(data){
+                        $(origin).removeAttr("disabled");
+                        $(origin).parent().remove();
+                        show_tip("删除成功");
+                    },
+                    error: function(result){
+                        $(origin).removeAttr("disabled");
+                        show_tip("删除失败");
+                    }
+                })
+            }
+         })
+    }
+
+     function add_member(origin, param){
+         return new Promise(function(resolve, reject){
+             setTimeout(function(){
+                 if($("#member_modal_page").find("input.input_validation-failed").length){
+                    return;
+                 }
+                 var is_reload = true;
+                 if(!param){
+                    var member = $("#group_member").val();
+                    var curr_group_id = $("#groups").val();
+                    var curr_domain_id = $("#domains").val();
+                    param = {member: member, group_id: curr_group_id, domain_id:curr_domain_id};
+                 }else{
+                    is_reload = false;
+                 }
+                 var success_tip = origin ? "新增成功" : "操作成功";
+                 var fail_tip =  origin ? "新增失败" : "操作失败";
+                     $.ajax({
+                        type: 'POST',
+                        url: '/domain/user/add/',
+                        dataType: 'json',
+                        data: param,
+                        async: false,
+                        success: function(data){
+                            $(origin).removeAttr("disabled");
+                            if(data.result == 'success'){
+                                $("#member_modal_page").modal("hide");
+                                if(is_reload){
+                                    show_tip(success_tip, true);
+                                    setTimeout(function(){
+                                        window.location.reload();
+                                    },100)
+                                }
+                                resolve(true);
+                            }else if(data.result == 'exist'){
+                                if (data.domain == ''){
+                                    show_tip('该用户已存在于\"' + data.group + '\"，请确认');
+                                }else{
+                                    show_tip('该用户已存在于\"' + data.group + '， ' + data.domain + '\"，请确认');
+                                }
+                            }
+                        },
+                        error: function(result){
+                            $(origin).removeAttr("disabled");
+                            show_tip(fail_tip);
+                            reject(false);
+                        }
+                     })
+             },0)
+          })
+    }
+
+    function add_group(origin){
+        setTimeout(function(){
+            if($("#group_modal_page").find("input.input_validation-failed").length){
+                return;
+            }
+            $(origin).attr("disabled", true);
+            var param = get_group_param();
+            $.ajax({
+                type: 'POST',
+                url: '/user/group/add/',
+                dataType: 'json',
+                data: JSON.stringify(param),
+                async: false,
+                success: function(data){
+                    $(origin).removeAttr("disabled");
+                    if(data.result == 'success'){
+                        $("#group_modal_page").modal("hide");
+                        show_tip("新增成功", true);
+                        setTimeout(function(){
+                            window.location.reload();
+                        },100)
+                    }else if(data.result == 'group_exist'){
+                        show_tip('该责任组已存在，请确认');
+                    }else if(data.result == 'domain_exist'){
+                        show_tip('领域重复，请确认');
+                    }
+                },
+                error: function(result){
+                    $(origin).removeAttr("disabled");
+                    show_tip("新增失败");
+                }
+            })
+        },100)
+    }
+
+    function edit_group(origin){
+        setTimeout(function(){
+            if($("#group_modal_page").find("input.input_validation-failed").length){
+                return;
+            }
+            $(origin).attr("disabled", true);
+            var param = get_group_param();
+            $.ajax({
+                type: 'POST',
+                url: '/user/group/edit/',
+                dataType: 'json',
+                data: JSON.stringify(param),
+                async: false,
+                success: function(data){
+                    $(origin).removeAttr("disabled");
+                    if(data.result == 'success'){
+                        $("#group_modal_page").modal("hide");
+                        show_tip("修改成功", true);
+                        setTimeout(function(){
+                            window.location.reload();
+                        },100)
+                    }else if(data.result == 'group_exist'){
+                        show_tip('该责任组已存在，请确认');
+                    }else if(data.result == 'domain_exist'){
+                        show_tip('领域重复，请确认');
+                    }
+                },
+                error: function(result){
+                    $(origin).removeAttr("disabled");
+                    show_tip("修改失败");
+                }
+            })
+        },100)
+    }
+
+    function get_group_param(){
+        var param = {};
+        var add_group = {
+            id: $("input[name='group_name']").attr("id"),
+            value: $("input[name='group_name']").val()
+        };
+        var add_domains = [];
+        $("input[name='add_domain']").each(function(index, item){
+            add_domains.push({
+                id: $(item).attr("id"),
+                value: $(item).val()
+            });
+        })
+        param.group = add_group;
+        param.domains = add_domains;
+        return param;
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container" id="group_mange_draggable">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body" style="display: none">
+                <div>
+                    <ul class="group-navigation" id="group_navigation"></ul>
+                </div>
+                {% for group in data %}
+                <div class="group">
+                    <div class="group-top">
+                        <div class="group-name">
+                            <span id="{{group.group.id}}">{{group.group.value}}</span>
+                        </div>
+                        <div class="group-btn">
+                            <span class="btn btn-sm btn-info" onclick="show_edit_page('{{group.group.id}}','{{group.group.value}}')" title="编辑">
+                                <i class="fa fa-edit fa-lg"></i>
+                            </span>
+                            <span class="btn btn-sm btn-danger" onclick="delete_group(this, '{{group.group.id}}')" title="删除">
+                                <i class="icon-trash icon-large"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="group-content">
+                        {% for domain in group.domains %}
+                        <div class="row group-domain">
+                            <div class="group-domain-name col-sm-1" title="{{domain.value}}"><span id="{{domain.id}}">{{domain.value}}</span>{% if domain.value%}：{%endif%}</div>
+                            <div class="group-domain-members col-sm-10">
+                                {% for member in domain.members %}
+                                <div class="group-domain-user " role="draggable">
+                                    <span>{{member}}</span>
+                                    <span style="margin-left: 5px;font-size: 16px;" onclick="delete_member(this)">x</span>
+                                </div>
+                                {% endfor %}
+                                <div class="group-domain-add" onclick="show_add_member_page('{{group.group.value}}','{{domain.value}}')" title="新增成员">
+                                    <span>+</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--add group page start-->
+<div class="modal fade" id="group_modal_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:800px;height:50px;">
+        <div class="modal-content" id="group_modal_content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times</button>
+                <input class="add-title" type="text" maxlength="45" name="group_name" placeholder="请输入责任组" valid="required"  errmsg="不能为空!">
+            </div>
+            <div class="modal-body scrollbar-style" id="add_modal_body" style="padding: 0px 5px;">
+                <div>
+                    <div class="add-domain-btn" id="add_domain_btn" onclick="add_domain(this)">
+                        <span>+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                <button type="button" onclick="edit_group(this)" class="btn btn-primary submit-unit" id="group_edit">修改</button>
+                <button type="button" onclick="add_group(this)" class="btn btn-primary submit-unit" id="group_add">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--add group page end-->
+
+<!--add member page start-->
+<div class="modal fade" id="member_modal_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:500px;height:50px;">
+        <div class="modal-content" id="member_modal_content" style="color:#7d7d7d">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times</button>
+                <h4>新增用户</h4>
+            </div>
+            <div class="modal-body" id="add_member_body" style="padding: 0px 5px;">
+                 <div class="row" style="margin-top:15px;line-height: 30px;">
+                    <label for="group_member" class="col-sm-2 control-label" style="margin-left:15px;margin-right:-15px">用户:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="group_member" valid="required" placeholder="例:程慧正 c00164634" errmsg="不能为空!">
+                    </div>
+                 </div>
+                 <div class="row" style="margin-top:15px;line-height: 30px;">
+                     <label class="col-sm-2" style="margin-left:15px;margin-right:-15px">群组:</label>
+                     <div class="col-sm-10">
+                         <select class="form-control group-select" id="groups" style="margin-right: 20px;color:#7d7d7d" onchange="change_group()"></select>
+                         <select class="form-control group-select" id="domains" style="color:#7d7d7d"></select>
+                         <div id="error_tip" style="color:red"></div>
+                     </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" onclick="add_member(this)" class="btn btn-primary submit-unit">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--add member page end-->
+{% endblock %}
