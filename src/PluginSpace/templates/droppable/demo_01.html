@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+      #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+      #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'droppable_left_nav_bar.html' with active_idx=1 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>在任意的 DOM 元素上启用 droppable 功能，并为可拖拽小部件创建目标。</p>
+
+        <div id="draggable" class="ui-widget-content">
+          <p>请把我拖拽到目标处！</p>
+        </div>
+
+        <div id="droppable" class="ui-widget-header">
+          <p>请放置在这里！</p>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+        drop: function( event, ui ) {
+            $( this )
+                .addClass( "ui-state-highlight" )
+                .find( "p" )
+                .html( "Dropped!" );
+        }
+    });
+});
+
+</script>
+{% endblock %}
+

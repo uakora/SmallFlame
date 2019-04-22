@@ -35,4 +35,12 @@ urlpatterns = [
     path('draggable/demo/10', views.draggable_demo_10),
     path('draggable/demo/11', views.draggable_demo_11),
 
+    path('droppable/demo/01', views.droppable_demo_01),
+    path('droppable/demo/02', views.droppable_demo_02),
+    path('droppable/demo/03', views.droppable_demo_03),
+    path('droppable/demo/04', views.droppable_demo_04),
+    path('droppable/demo/05', views.droppable_demo_05),
+    path('droppable/demo/06', views.droppable_demo_06),
+    path('droppable/demo/07', views.droppable_demo_07),
+
 ]

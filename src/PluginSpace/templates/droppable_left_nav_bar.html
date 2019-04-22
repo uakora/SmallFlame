@@ -1,0 +1,32 @@
+<div class="left-nav-title">
+    <i class="fa fa-reorder"></i>Draggable示例
+</div>
+<ul class="left-nav-bar">
+    <li>
+        <a href="/plugins/droppable/demo/01">默认功能</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/02">接受</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/03">防止传播</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/04">还原 draggable 的位置</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/05">购物车演示</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/06">简单的照片管理器</a>
+    </li>
+    <li>
+        <a href="/plugins/droppable/demo/07">视觉反馈</a>
+    </li>
+
+</ul>
+
+<script>
+    var index = "{{ active_idx | safe }}";
+    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+</script>
