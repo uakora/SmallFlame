@@ -1,0 +1,43 @@
+<div class="left-nav-title">
+    <i class="fa fa-reorder"></i>Draggable示例
+</div>
+<ul class="left-nav-bar">
+    <li>
+        <a href="/plugins/draggable/demo/01">默认功能</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/02">自动滚动</a>
+    </li>
+        <li>
+        <a href="/plugins/draggable/demo/03">约束运动</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/04">光标样式</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/05">延迟开始</a>
+    </li>
+        <li>
+        <a href="/plugins/draggable/demo/06">事件</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/07">Handles</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/08">还原位置</a>
+    </li>
+        <li>
+        <a href="/plugins/draggable/demo/09">对齐到元素或网格</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/10">视觉反馈</a>
+    </li>
+    <li>
+        <a href="/plugins/draggable/demo/01">jQuery UI Draggable + Sortable</a>
+    </li>
+</ul>
+
+<script>
+    var index = "{{ active_idx | safe }}";
+    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+</script>

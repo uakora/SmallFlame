@@ -9,6 +9,37 @@ from django.http import HttpResponse
 def plugin_space_index(request):
     return render(request, 'index.html')
 
+
+def draggable_demo_01(request):
+    return render(request, 'draggable/demo_01.html')
+
+def draggable_demo_02(request):
+    return render(request, 'draggable/demo_02.html')
+
+def draggable_demo_03(request):
+    return render(request, 'draggable/demo_03.html')
+
+def draggable_demo_04(request):
+    return render(request, 'draggable/demo_04.html')
+
+def draggable_demo_05(request):
+    return render(request, 'draggable/demo_05.html')
+
+def draggable_demo_06(request):
+    return render(request, 'draggable/demo_06.html')
+
+def draggable_demo_07(request):
+    return render(request, 'draggable/demo_07.html')
+
+def draggable_demo_08(request):
+    return render(request, 'draggable/demo_08.html')
+
+def draggable_demo_09(request):
+    return render(request, 'draggable/demo_09.html')
+
+def draggable_demo_10(request):
+    return render(request, 'draggable/demo_10.html')
+
 def datatable_learn01(request):
     return render(request, 'datatables/learn01.html')
 
@@ -80,6 +111,7 @@ def datatable_demo_09(request):
 
 def datatable_demo_10(request):
     return render(request, 'datatables/demo_10.html')
+
 
 def dt_demo_06_logs(request):
 

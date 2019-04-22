@@ -22,4 +22,16 @@ urlpatterns = [
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
 
     path('multiselect/learn01/', views.multiselect_learn01, name='multiselect'),
+
+    path('draggable/demo/01', views.draggable_demo_01),
+    path('draggable/demo/02', views.draggable_demo_02),
+    path('draggable/demo/03', views.draggable_demo_03),
+    path('draggable/demo/04', views.draggable_demo_04),
+    path('draggable/demo/05', views.draggable_demo_05),
+    path('draggable/demo/06', views.draggable_demo_06),
+    path('draggable/demo/07', views.draggable_demo_07),
+    path('draggable/demo/08', views.draggable_demo_08),
+    path('draggable/demo/09', views.draggable_demo_09),
+    path('draggable/demo/10', views.draggable_demo_10),
+
 ]

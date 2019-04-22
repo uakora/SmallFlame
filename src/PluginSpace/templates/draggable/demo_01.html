@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        #draggable { width: 150px; height: 53px; padding: 0.5em; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'draggable_left_nav_bar.html' with active_idx=1 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <div id="draggable" class="ui-widget-content">
+            <p>请拖动我！</p>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $("#draggable").draggable();
+});
+
+</script>
+{% endblock %}
+
