@@ -1,0 +1,60 @@
+        $( "div[role='draggable']" ).draggable({
+            scroll: true,
+            containment: "#group_mange_draggable",
+            revert: true,
+            stack: "div[role='draggable']",
+            cursorAt: { top: 15, left: 70 },
+            start: function(event) {
+            },
+            drag: function(event) {
+            },
+            stop: function(event) {
+            }
+        });
+        
+                $("div.group-domain-members").droppable({
+            over: function(event,ui) {
+                var target = $(event.target);
+                target.css("background-color","#EDF4FD");
+            },
+            out: function(event,ui){
+                var target = $(event.target);
+                target.css("background-color","transparent");
+            },
+            drop: function(event,ui){
+                var target = $(event.target);
+                target.css("background-color","transparent");
+                var add_member_param = {};
+                add_member_param.member  = $(ui.draggable.find("span")[0]).text();
+                add_member_param.group_id = target.parent().parent().parent().find("div.group-top").find("div.group-name").find("span").attr("id");
+                add_member_param.domain_id = target.prev().find("span").attr("id");
+
+                var delete_member_param = {};
+                delete_member_param.member  = $(ui.draggable.find("span")[0]).text();
+                delete_member_param.group_id = ui.draggable.parent().parent().parent().parent().find("div.group-top").find("div.group-name").find("span").attr("id");
+                delete_member_param.domain_id = ui.draggable.parent().prev().find("span").attr("id");
+                if(ui.draggable.parent()[0] != target[0]){
+                    target_drop(delete_member_param, add_member_param).then(function(){
+                        target.find("div.group-domain-add").before(ui.draggable);
+                    });
+                }
+            },
+        })
+        
+        
+            function target_drop(delete_member_param, add_member_param){
+        return new Promise(function(resolve, reject){
+            $.ajax({
+                type: 'POST',
+                url: '/domain/user/delete/',
+                dataType: 'json',
+                data: delete_member_param,
+                async: false,
+                success: function(data){
+                    add_member(null, add_member_param).then(function(){
+                        resolve(true);
+                    });
+                },
+            })
+        })
+    }
