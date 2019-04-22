@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        #draggable { width: 16em; padding: 0 1em; }
+        #draggable ul li { margin: 1em 0; padding: 0.5em 0; } * html #draggable ul li { height: 1%; }
+        #draggable ul li span.ui-icon { float: left; }
+        #draggable ul li span.count { font-weight: bold; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'draggable_left_nav_bar.html' with active_idx=6 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>
+        draggable 上的 <code>start</code>、<code>drag</code> 和 <code>stop</code> 事件。拖拽开始时触发 <code>start</code>
+         事件，拖拽期间触发 <code>drag</code> 事件，拖拽停止时触发 <code>stop</code> 事件。
+        </p>
+
+        <div id="draggable" class="ui-widget ui-widget-content">
+
+            <p>请拖拽我，触发一连串的事件。</p>
+
+            <ul class="ui-helper-reset">
+                <li id="event-start" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-play"></span>"start" 被调用 <span class="count">0</span>x</li>
+                <li id="event-drag" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrow-4"></span>"drag" 被调用 <span class="count">0</span>x</li>
+                <li id="event-stop" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-stop"></span>"stop" 被调用 <span class="count">0</span>x</li>
+            </ul>
+        </div>
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    var $start_counter = $( "#event-start" ),
+      $drag_counter = $( "#event-drag" ),
+      $stop_counter = $( "#event-stop" ),
+      counts = [ 0, 0, 0 ];
+
+    $( "#draggable" ).draggable({
+      start: function() {
+        counts[ 0 ]++;
+        updateCounterStatus( $start_counter, counts[ 0 ] );
+      },
+      drag: function() {
+        counts[ 1 ]++;
+        updateCounterStatus( $drag_counter, counts[ 1 ] );
+      },
+      stop: function() {
+        counts[ 2 ]++;
+        updateCounterStatus( $stop_counter, counts[ 2 ] );
+      }
+    });
+
+    function updateCounterStatus( $event_counter, new_count ) {
+      // 首先更新视觉状态...
+      if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
+        $event_counter.addClass( "ui-state-hover" )
+          .siblings().removeClass( "ui-state-hover" );
+      }
+      // ...然后更新数字
+      $( "span.count", $event_counter ).text( new_count );
+    }
+});
+
+</script>
+{% endblock %}
+

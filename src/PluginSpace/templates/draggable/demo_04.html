@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        #draggable, #draggable2, #draggable3 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'draggable_left_nav_bar.html' with active_idx=4 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>
+        当拖拽对象时定位光标。默认情况下，光标是出现在被拖拽对象的中间。使用
+        <code>cursorAt</code>
+         选项来指定相对于 draggable 的另一个位置（指定一个相对于 top、right、bottom、left 的像素值）。通过提供一个带有有效的 CSS 光标值的
+        <code>cursor</code>
+         选项，来自定义光标的外观。有效的 CSS 光标值包括：default、move、pointer、crosshair，等等。
+        </p>
+
+        <div id="draggable" class="ui-widget-content">
+          <p>我总是在中间（相对于鼠标）</p>
+        </div>
+
+        <div id="draggable2" class="ui-widget-content">
+          <p>我的光标是在 left -5 和 top -5</p>
+        </div>
+
+        <div id="draggable3" class="ui-widget-content">
+          <p>我的光标位置只控制了 'bottom' 值</p>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $( "#draggable" ).draggable({ cursor: "move", cursorAt: { top: 56, left: 56 } });
+    $( "#draggable2" ).draggable({ cursor: "crosshair", cursorAt: { top: -5, left: -5 } });
+    $( "#draggable3" ).draggable({ cursorAt: { bottom: 0 } });
+});
+
+</script>
+{% endblock %}
+
