@@ -33,5 +33,6 @@ urlpatterns = [
     path('draggable/demo/08', views.draggable_demo_08),
     path('draggable/demo/09', views.draggable_demo_09),
     path('draggable/demo/10', views.draggable_demo_10),
+    path('draggable/demo/11', views.draggable_demo_11),
 
 ]

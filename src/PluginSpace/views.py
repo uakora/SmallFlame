@@ -40,6 +40,9 @@ def draggable_demo_09(request):
 def draggable_demo_10(request):
     return render(request, 'draggable/demo_10.html')
 
+def draggable_demo_11(request):
+    return render(request, 'draggable/demo_11.html')
+
 def datatable_learn01(request):
     return render(request, 'datatables/learn01.html')
 

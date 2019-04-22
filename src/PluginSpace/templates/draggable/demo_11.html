@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+        li { margin: 5px; padding: 5px; width: 150px; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'draggable_left_nav_bar.html' with active_idx=11 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>Draggable 与 Sortable 的无缝交互。</p>
+
+        <ul>
+          <li id="draggable" class="ui-state-highlight">请拖拽我</li>
+        </ul>
+
+        <ul id="sortable">
+          <li class="ui-state-default">Item 1</li>
+          <li class="ui-state-default">Item 2</li>
+          <li class="ui-state-default">Item 3</li>
+          <li class="ui-state-default">Item 4</li>
+          <li class="ui-state-default">Item 5</li>
+        </ul>
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    $( "#draggable" ).draggable({
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+});
+
+</script>
+{% endblock %}
+

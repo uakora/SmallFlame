@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        .draggable { width: 90px; height: 80px; padding: 5px; float: left; margin: 0 10px 10px 0; font-size: .9em; }
+        .ui-widget-header p, .ui-widget-content p { margin: 0; }
+        #snaptarget { height: 140px; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'draggable_left_nav_bar.html' with active_idx=9 %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>
+        对齐 draggable 到 DOM 元素的内部或外部边界。使用 <code>snap</code>、<code>snapMode</code>（inner, outer, both）和 <code>snapTolerance</code>
+        （当调用对齐时，draggable 与元素之间的距离，以像素为单位）选项。
+        </p>
+        <p>
+        或者对齐 draggable 到网格。通过 <code>grid</code> 选项设置网格单元的尺寸（以像素为单位的高度或宽度）。
+        </p>
+
+        <div id="snaptarget" class="ui-widget-header">
+          <p>我是对齐目标</p>
+        </div>
+
+        <br style="clear:both">
+
+        <div id="draggable" class="draggable ui-widget-content">
+          <p>默认（snap: true），对齐到所有其他的 draggable 元素</p>
+        </div>
+
+        <div id="draggable2" class="draggable ui-widget-content">
+          <p>我只对齐到大盒子</p>
+        </div>
+
+        <div id="draggable3" class="draggable ui-widget-content">
+          <p>我只对齐到大盒子的外边缘</p>
+        </div>
+
+        <div id="draggable4" class="draggable ui-widget-content">
+          <p>我对齐到一个 20 x 20 网格</p>
+        </div>
+
+        <div id="draggable5" class="draggable ui-widget-content">
+          <p>我对齐到一个 80 x 80 网格</p>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $( "#draggable" ).draggable({ snap: true });
+    $( "#draggable2" ).draggable({ snap: ".ui-widget-header" });
+    $( "#draggable3" ).draggable({ snap: ".ui-widget-header", snapMode: "outer" });
+    $( "#draggable4" ).draggable({ grid: [ 20, 20 ] });
+    $( "#draggable5" ).draggable({ grid: [ 80, 80 ] });
+});
+
+</script>
+{% endblock %}
+
