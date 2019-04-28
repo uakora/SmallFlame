@@ -1,0 +1,13 @@
+<div class="left-nav-title">
+    <i class="fa fa-reorder"></i>Highcharts示例
+</div>
+<ul class="left-nav-bar">
+    <li>
+        <a href="/plugins/highcharts/demo/01">可下砖的柱状图</a>
+    </li>
+</ul>
+
+<script>
+    var index = "{{ active_idx | safe }}";
+    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+</script>

@@ -9,8 +9,14 @@ from django.http import HttpResponse
 def plugin_space_index(request):
     return render(request, 'index.html')
 
+
+def highcharts_demo_idx(request, demo_idx=1):
+    html = 'highcharts/demo_%d.html' % (demo_idx)
+    return render(request, html, {"demo_idx": demo_idx})
+
+
 def droppable_demo_01(request):
-    return render(request, 'droppable/demo_01.html')
+    return render(request, 'droppable/demo_1.html')
 
 def droppable_demo_02(request):
     return render(request, 'droppable/demo_02.html')
@@ -31,7 +37,7 @@ def droppable_demo_07(request):
     return render(request, 'droppable/demo_07.html')
 
 def draggable_demo_01(request):
-    return render(request, 'draggable/demo_01.html')
+    return render(request, 'draggable/demo_1.html')
 
 def draggable_demo_02(request):
     return render(request, 'draggable/demo_02.html')

@@ -43,4 +43,6 @@ urlpatterns = [
     path('droppable/demo/06', views.droppable_demo_06),
     path('droppable/demo/07', views.droppable_demo_07),
 
+    path('highcharts/demo/<int:demo_idx>', views.highcharts_demo_idx)
+
 ]
