@@ -10,6 +10,11 @@ def plugin_space_index(request):
     return render(request, 'index.html')
 
 
+def datetimepicker_demo_idx(request, demo_idx=1):
+    html = 'datetimepicker/demo_%d.html' % (demo_idx)
+    return render(request, html, {"demo_idx": demo_idx})
+
+
 def highcharts_demo_idx(request, demo_idx=1):
     html = 'highcharts/demo_%d.html' % (demo_idx)
     return render(request, html, {"demo_idx": demo_idx})

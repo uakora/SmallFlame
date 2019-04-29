@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <style>
+
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/static/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'datetimepicker_left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <form action="" class="form-horizontal"  role="form">
+            <fieldset>
+                <legend>Test</legend>
+                <div class="form-group">
+                    <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
+                    <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input1" value="" /><br/>
+                </div>
+                <div class="form-group">
+                    <label for="dtp_input2" class="col-md-2 control-label">Date Picking</label>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                </div>
+                <div class="form-group">
+                    <label for="dtp_input4" class="col-md-2 control-label">Month Picking</label>
+                    <div class="input-group date form_month col-md-5" data-date="" data-date-format="yyyy-mm" data-link-field="dtp_input4" data-link-format="yyyy-mm">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input4" value="" /><br/>
+                </div>
+                <div class="form-group">
+                    <label for="dtp_input3" class="col-md-2 control-label">Time Picking</label>
+                    <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input3" value="" /><br/>
+                </div>
+            </fieldset>
+        </form>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+	$('.form_month').datetimepicker({
+        language:  'zh-CN',
+		autoclose: 1,
+		startView: 3,
+		minView: 3,
+		forceParse: 0
+    });
+
+	
+
+</script>
+{% endblock %}
+

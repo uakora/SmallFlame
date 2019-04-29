@@ -1,0 +1,34 @@
+<div class="left-nav-title">
+    <i class="fa fa-reorder"></i>DateTimePicker示例
+</div>
+<ul class="left-nav-bar">
+    <li>
+        <a href="/plugins/datetimepicker/demo/1">1分钟上手</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/2">可下砖的柱状图</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/3">堆叠柱形图</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/4">示例</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/5">示例</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/6">示例</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/7">示例</a>
+    </li>
+    <li>
+        <a href="/plugins/datetimepicker/demo/8">示例</a>
+    </li>
+</ul>
+
+<script>
+    var index = "{{ active_idx | safe }}";
+    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+</script>
