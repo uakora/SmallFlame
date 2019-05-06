@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+    <script src="/static/plugins/echarts4.2.1/echarts.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'echarts_left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <div id="example" style="height: 450px;"></div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById("example"));
+    var option = {
+        xAxis: {
+            data: ['a', 'b', 'c', 'd'],
+            axisTick: {show: false},
+            axisLabel: {
+                formatter: 'barGap: \'-100%\''
+            }
+        },
+        yAxis: {
+            splitLine: {show: false}
+        },
+        animationDurationUpdate: 1200, // 初始动画时长
+        series: [{
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    color: '#ddd'
+                }
+            },
+            silent: true,
+            barWidth: 40,
+            barGap: '-100%', // Make series be overlap
+            data: [60, 60, 60, 60]
+        }, {
+            type: 'bar',
+            barWidth: 40,
+            z: 10,
+            data: [45, 60, 13, 25]
+        }]
+    };
+    myChart.setOption(option);
+
+    var barGaps = ['30%', '-100%'];
+    var loopIndex = 0;
+    setInterval(function () {
+        var barGap = barGaps[loopIndex];
+        myChart.setOption({
+            xAxis: {
+                axisLabel: {
+                    formatter: 'barGap: \'' + barGap + '\''
+                }
+            },
+            series: [
+                {
+                    barGap: barGap
+                }
+            ]
+        });
+        loopIndex = (loopIndex + 1) % barGaps.length;
+
+    }, 2000);
+
+</script>
+{% endblock %}
+
