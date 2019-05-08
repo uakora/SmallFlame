@@ -10,13 +10,11 @@ urlpatterns = [
     path('datatable/learn05/', views.datatable_learn05, name='datatable'),
     path('datatable/learn05/data', views.datatable_learn05_data, name='datatable'),
 
-    path('datatable/demo/06', views.datatable_demo_06, name='datatable'),
+    path('datatable/learn06', views.datatable_demo_06, name='datatable'),
     path('datatable/demo/06/log/data/', views.dt_demo_06_logs),
 
-    path('datatable/demo/07', views.datatable_demo_07, name='datatable'),
-    path('datatable/demo/08', views.datatable_demo_08, name='datatable'),
-    path('datatable/demo/09', views.datatable_demo_09, name='datatable'),
-    path('datatable/demo/10', views.datatable_demo_10, name='datatable'),
+    path('datatable/learn07', views.datatable_demo_09, name='datatable'),
+    path('datatable/learn08', views.datatable_demo_10, name='datatable'),
 
 
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
@@ -43,6 +41,7 @@ urlpatterns = [
     path('droppable/demo/06', views.droppable_demo_06),
     path('droppable/demo/07', views.droppable_demo_07),
 
+    path('datatables/demo/<int:demo_idx>', views.datatables_demo_idx),
     path('echarts/demo/<int:demo_idx>', views.echarts_demo_idx),
     path('highcharts/demo/<int:demo_idx>', views.highcharts_demo_idx),
     path('datetimepicker/demo/<int:demo_idx>', views.datetimepicker_demo_idx)

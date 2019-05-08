@@ -37,23 +37,32 @@
 <div class="flame-container flame-body">
     <div class="left-column">
         {% block left_nav_bar %}
-        {% include 'datatables_left_nav_bar.html' with active_idx=7 %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=demo_idx %}
         {% endblock %}
     </div>
     <div class="center-column">
         {% block center_content %}
-        <div>
-            <table id="example" class="table table-striped" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th style="width: 20px;">Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Salary</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+        <table id="example" class="table table-striped" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th style="width: 20px;">Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+        </table>
+        <hr style="border-color: #a94442;"/>
+        <table id="example2" class="table table-striped" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th style="width: 20px;">Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+        </table>
         {% endblock %}
     </div>
 </div>
@@ -64,7 +73,19 @@
 
 
 $(document).ready(function () {
-    var dt_table = $("#example").DataTable({
+    var dt_table2 = $("#example").DataTable({
+        "dom": 'ftp',
+        "ajax": "/static/data/objects.txt",
+        "autoWidth": false,
+        "columns": [
+            {"data": "name"},
+            {"data": "position"},
+            {"data": "office"},
+            {"data": "salary"}
+        ]
+    });
+
+    var dt_table2 = $("#example2").DataTable({
         "language": {
             //"url": "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
             "sProcessing":   "加载中...",
@@ -91,7 +112,7 @@ $(document).ready(function () {
         "ajax": "/static/data/objects.txt",
         "autoWidth": false,
         "columns": [
-            {"data": "name", },
+            {"data": "name"},
             {"data": "position"},
             {"data": "office"},
             {"data": "salary"}

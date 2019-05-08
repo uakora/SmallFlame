@@ -10,6 +10,11 @@ def plugin_space_index(request):
     return render(request, 'index.html')
 
 
+def datatables_demo_idx(request, demo_idx=1):
+    html = 'datatables/demo_%d.html' % (demo_idx)
+    return render(request, html, {"demo_idx": demo_idx})
+
+
 def datetimepicker_demo_idx(request, demo_idx=1):
     html = 'datetimepicker/demo_%d.html' % (demo_idx)
     return render(request, html, {"demo_idx": demo_idx})
@@ -44,7 +49,7 @@ def droppable_demo_06(request):
     return render(request, 'droppable/demo_06.html')
 
 def droppable_demo_07(request):
-    return render(request, 'droppable/demo_07.html')
+    return render(request, 'droppable/demo_03.html')
 
 def draggable_demo_01(request):
     return render(request, 'draggable/demo_1.html')
@@ -65,7 +70,7 @@ def draggable_demo_06(request):
     return render(request, 'draggable/demo_06.html')
 
 def draggable_demo_07(request):
-    return render(request, 'draggable/demo_07.html')
+    return render(request, 'draggable/demo_03.html')
 
 def draggable_demo_08(request):
     return render(request, 'draggable/demo_08.html')
@@ -133,23 +138,15 @@ def datatable_learn05_data(request):
 
 
 def datatable_demo_06(request):
-    return render(request, 'datatables/demo_06.html')
-
-
-def datatable_demo_07(request):
-    return render(request, 'datatables/demo_07.html')
-
-
-def datatable_demo_08(request):
-    return render(request, 'datatables/demo_08.html')
+    return render(request, 'datatables/learn06.html')
 
 
 def datatable_demo_09(request):
-    return render(request, 'datatables/demo_09.html')
+    return render(request, 'datatables/learn07.html')
 
 
 def datatable_demo_10(request):
-    return render(request, 'datatables/demo_10.html')
+    return render(request, 'datatables/learn08.html')
 
 
 def dt_demo_06_logs(request):
