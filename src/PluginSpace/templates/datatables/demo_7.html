@@ -20,6 +20,9 @@
     </div>
     <div class="center-column">
         {% block center_content %}
+        <p class="bg-info" style="padding: 13px;">如果在一个固定高度的容器里放table，这个时候可能需要用到垂直滚动条，才能展示所有数据。
+            开启垂直滚动条很简单，只要设置<code>scrollY</code>和<code>scrollCollapse</code>选项即可。
+        </p>
         <table id="example" class="table table-hover">
             <thead>
                 <tr>
@@ -41,10 +44,14 @@
 
 $(document).ready(function () {
     $("#example").DataTable({
-        "language": {
-            "url": "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
+        'language': {
+            'url': "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
         },
-        "stateSave": true,
+        'paging': false,
+        'ordering': false,
+        'info': false,
+        'scrollY': '350px',
+        'scrollCollapse': true,
         "ajax": "/static/data/objects.txt",
         "columns": [
             {"data": "name"},

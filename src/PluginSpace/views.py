@@ -84,8 +84,7 @@ def draggable_demo_10(request):
 def draggable_demo_11(request):
     return render(request, 'draggable/demo_11.html')
 
-def datatable_learn01(request):
-    return render(request, 'datatables/learn01.html')
+
 
 def datatable_learn02(request):
     table_head = ['姓名', '性别', '角色', '全年', '月均',

@@ -26,6 +26,8 @@
                     <th style="width: 20px;">Name</th>
                     <th>Position</th>
                     <th>Office</th>
+                    <th>Extn</th>
+                    <th>Start Date</th>
                     <th>Salary</th>
                 </tr>
             </thead>
@@ -41,15 +43,17 @@
 
 $(document).ready(function () {
     $("#example").DataTable({
-        "language": {
-            "url": "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
+        'language': {
+            'url': "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
         },
-        "stateSave": true,
+        "order": [[2, "desc"], [3, "asc"]],
         "ajax": "/static/data/objects.txt",
         "columns": [
             {"data": "name"},
             {"data": "position"},
             {"data": "office"},
+            {"data": "extn"},
+            {"data": "start_date"},
             {"data": "salary"}
         ]
     });
