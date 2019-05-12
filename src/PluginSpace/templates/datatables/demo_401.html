@@ -5,6 +5,12 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
 
     <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+
+    <style>
+        a[name=edit_office] {
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}
 {% block js %}
     <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
@@ -32,6 +38,37 @@
                 </tr>
             </thead>
         </table>
+        <div>
+            <button id="dt_reload" class="btn btn-info">重新加载表格(dt_reload)</button>
+        </div>
+        <div style="min-height: 320px;">
+            <h4>弹出框popover</h4>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                  Popover on 左侧
+                </button>
+
+                <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                  Popover on 顶部
+                </button>
+
+                <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+                sagittis lacus vel augue laoreet rutrum faucibus.">
+                  Popover on 底部
+                </button>
+
+                <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                  Popover on 右侧
+                </button>
+            </div>
+            <div>
+                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">可消失的弹出框</a>
+            </div>
+            <div>
+                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus">可消失的弹出框</a>
+                <a id="p_test" tabindex="0" class="btn btn-lg btn-success" role="button">可消失的弹出框</a>
+            </div>
+        </div>
         {% endblock %}
     </div>
 </div>
@@ -51,13 +88,65 @@ $(function () {
         "columns": [
             {"data": "name"},
             {"data": "position"},
-            {"data": "office"},
+            {
+                "data": "office",
+                "render": function (data, type, row, meta) {
+                    var $dom = $('<a name="edit_office">'+ data +'</a>');
+                    return $dom[0].outerHTML;
+                    //return '<a name="edit_office" data-toggle="popover" data-title="编辑office">'+ data +'</a>'
+                }
+            },
             {"data": "extn"},
             {"data": "start_date"},
             {"data": "salary"}
-        ]
+        ],
+        'initComplete': function (settings, json) {
+            console.log("++++++initComplete");
+            //$('[data-toggle="popover"]').popover();
+            $('a[name=edit_office]').popover({
+                'container': 'body',
+                //'content': 'content ...',
+                'content': '<input type = "text">',
+                'html': true,
+                'placement': 'auto',
+                'title': '编辑office'
+            });
+
+            $('a[name=edit_office]').on('show.bs.popover', function () {
+                console.log("show++++");
+            });
+            $('a[name=edit_office]').on('shown.bs.popover', function () {
+                console.log("+++shown++++");
+            });
+            $('a[name=edit_office]').on('hide.bs.popover', function () {
+                console.log("hidden++++");
+            });
+            $('a[name=edit_office]').on('hidden.bs.popover', function () {
+                console.log("+++hidden++++");
+            });
+            $('a[name=edit_office]').on('inserted.bs.popover', function () {
+                console.log("+++inserted++++");
+            });
+        }
     });
 
+    $("#dt_reload").click(function () {
+        $('a[name=edit_office]').popover('destroy');
+        dt_table.ajax.reload(function () {
+           $('a[name=edit_office]').popover({
+                'container': 'body',
+                //'content': 'content ...',
+                'content': '<input type = "text">',
+                'html': true,
+                'placement': 'auto',
+                'title': '编辑office'
+            });
+        }, false);
+    });
+
+    //$('[data-toggle="popover"]').popover();
+
+    /*
     $("#example > tbody").on('click', 'tr > td', function () {
         var $tr = $(this).closest('tr');
         var tr_data = dt_table.row($tr).data();
@@ -66,6 +155,30 @@ $(function () {
         console.info('td_data: ', td_data);
         //var $input = $('<input type = "text" value = "'+ td_data +'">');
         $(this).html('<input type = "text" value = "'+ td_data +'">');
+    });
+    */
+    $("#example > tbody").on('click', 'tr > td', function () {
+        var $td_a = $(this).children('a');
+        var a_name = $td_a.attr('name');
+        /*
+        if(a_name == 'edit_office') {
+            $td_a.popover({
+                'container': 'body',
+                'content': 'content ...',
+                'placement': 'auto',
+                //'title': '编辑office'
+            });
+            //$td_a.popover('toggle');
+        }
+        */
+    });
+
+    $("#p_test").popover({
+        'container': 'body',
+        'content': 'content ...',
+        'placement': 'auto',
+        'title': '编辑office',
+        'trigger': 'focus'
     });
 
 });
