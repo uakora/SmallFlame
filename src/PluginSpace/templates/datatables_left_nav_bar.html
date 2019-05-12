@@ -1,61 +1,108 @@
-<div class="left-nav-title">
-    <i class="fa fa-reorder"></i>DataTable示例
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>DataTable基础
+    </div>
+    <ul class="left-nav-bar">
+        <li>
+            <a href="/plugins/datatables/demo/1" name="demo_1">零配置</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/2" name="demo_2">语言国际化</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/3" name="demo_3">DOM定位</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/4" name="demo_4">不同的分页样式</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/5" name="demo_5">功能启用/禁用</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/6" name="demo_6">保存状态</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/7" name="demo_7">垂直滚动条</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/8" name="demo_8">隐藏列</a>
+        </li>
+        <li>
+            <a href="/plugins/datatables/demo/9" name="demo_9">默认排序</a>
+        </li>
+    </ul>
 </div>
-<ul class="left-nav-bar">
-    <li>
-        <a href="/plugins/datatables/demo/01">零配置</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/02">语言国际化</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/03">DOM定位</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/04">不同的分页样式</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/05">功能启用/禁用</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/06">保存状态</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/07">垂直滚动条</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/08">隐藏列</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/09">默认排序</a>
-    </li>
-    <li>
-        <a href="/plugins/datatables/demo/10">createdRow示例</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn02">搜索示例</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn03">获取行数据</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn04">列的或搜索（正则式搜索）</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn05">行编辑、下拉</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn06">行折叠与展开</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn07">行分组</a>
-    </li>
-    <li>
-        <a href="/plugins/datatable/learn08">隐藏列的搜索</a>
-    </li>
-</ul>
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>DataTable回调函数
+    </div>
+    <ul class="left-nav-bar">
 
+    </ul>
+</div>
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>DataTable API
+    </div>
+    <ul class="left-nav-bar">
+
+    </ul>
+</div>
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>DataTable 实例
+    </div>
+    <ul class="left-nav-bar">
+        <li>
+            <a href="/plugins/datatables/demo/10" name="demo_10">createdRow示例</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn02">搜索示例</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn03">获取行数据</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn04">列的或搜索（正则式搜索）</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn05">行编辑、下拉</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn06">行折叠与展开</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn07">行分组</a>
+        </li>
+        <li>
+            <a href="/plugins/datatable/learn08">隐藏列的搜索</a>
+        </li>
+    </ul>
+</div>
 <script>
-    var index = "{{ active_idx | safe }}";
-    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+
+$(function () {
+    var active_idx = '{{ active_idx | safe }}';
+    var active_name = 'demo_' + active_idx;
+    var $active_a = $('a[name='+ active_name +']');
+    $active_a.addClass('active');
+    $active_a.closest('ul.left-nav-bar').show();
+    $active_a.closest('ul.left-nav-bar').addClass('open');
+
+    $('.left-nav-title').click(function () {
+        var $nav_bar = $(this).siblings('ul.left-nav-bar');
+        $nav_bar.slideToggle();
+        if($nav_bar.hasClass('open')) {
+            $nav_bar.removeClass('open');
+        }else {
+            var $open_nav_bar = $('ul.left-nav-bar.open');
+            if($open_nav_bar) {
+                $open_nav_bar.removeClass('open');
+                $open_nav_bar.slideUp();
+            }
+            $nav_bar.addClass('open');
+        }
+    });
+});
+
 </script>
