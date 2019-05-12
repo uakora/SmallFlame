@@ -130,6 +130,10 @@ $(function () {
         }
     });
 
+    $("#example").on('page.dt', function () {
+        console.log("page.dt");
+    });
+
     $("#dt_reload").click(function () {
         $('a[name=edit_office]').popover('destroy');
         dt_table.ajax.reload(function () {
