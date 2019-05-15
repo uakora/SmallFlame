@@ -20,6 +20,11 @@ def datetimepicker_demo_idx(request, demo_idx=1):
     return render(request, html, {"demo_idx": demo_idx})
 
 
+def draggable_demo_idx(request, demo_idx=1):
+    html = 'draggable/demo_%d.html' % (demo_idx)
+    return render(request, html, {"demo_idx": demo_idx})
+
+
 def echarts_demo_idx(request, demo_idx=1):
     html = 'echarts/demo_%d.html' % (demo_idx)
     return render(request, html, {"demo_idx": demo_idx})
@@ -50,40 +55,6 @@ def droppable_demo_06(request):
 
 def droppable_demo_07(request):
     return render(request, 'droppable/demo_03.html')
-
-def draggable_demo_01(request):
-    return render(request, 'draggable/demo_1.html')
-
-def draggable_demo_02(request):
-    return render(request, 'draggable/demo_02.html')
-
-def draggable_demo_03(request):
-    return render(request, 'draggable/demo_03.html')
-
-def draggable_demo_04(request):
-    return render(request, 'draggable/demo_04.html')
-
-def draggable_demo_05(request):
-    return render(request, 'draggable/demo_05.html')
-
-def draggable_demo_06(request):
-    return render(request, 'draggable/demo_06.html')
-
-def draggable_demo_07(request):
-    return render(request, 'draggable/demo_03.html')
-
-def draggable_demo_08(request):
-    return render(request, 'draggable/demo_08.html')
-
-def draggable_demo_09(request):
-    return render(request, 'draggable/demo_09.html')
-
-def draggable_demo_10(request):
-    return render(request, 'draggable/demo_10.html')
-
-def draggable_demo_11(request):
-    return render(request, 'draggable/demo_11.html')
-
 
 
 def datatable_learn02(request):

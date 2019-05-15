@@ -80,29 +80,7 @@
     </ul>
 </div>
 <script>
-
-$(function () {
-    var active_idx = '{{ active_idx | safe }}';
-    var active_name = 'demo_' + active_idx;
-    var $active_a = $('a[name='+ active_name +']');
-    $active_a.addClass('active');
-    $active_a.closest('ul.left-nav-bar').show();
-    $active_a.closest('ul.left-nav-bar').addClass('open');
-
-    $('.left-nav-title').click(function () {
-        var $nav_bar = $(this).siblings('ul.left-nav-bar');
-        $nav_bar.slideToggle();
-        if($nav_bar.hasClass('open')) {
-            $nav_bar.removeClass('open');
-        }else {
-            var $open_nav_bar = $('ul.left-nav-bar.open');
-            if($open_nav_bar) {
-                $open_nav_bar.removeClass('open');
-                $open_nav_bar.slideUp();
-            }
-            $nav_bar.addClass('open');
-        }
-    });
-});
-
+    var DEMO_IDX = '{{ active_idx | safe }}'; // 全局变量（用于left_nav.js）
 </script>
+<script src="/static/js/PluginSpace/left_nav.js"></script>
+

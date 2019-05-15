@@ -1,43 +1,46 @@
-<div class="left-nav-title">
-    <i class="fa fa-reorder"></i>Draggable示例
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>Draggable示例
+    </div>
+    <ul class="left-nav-bar">
+        <li>
+            <a href="/plugins/draggable/demo/1" name="demo_1">默认功能</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/2" name="demo_2">自动滚动</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/3" name="demo_3">约束运动</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/4" name="demo_4">光标样式</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/5" name="demo_5">延迟开始</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/6" name="demo_6">事件</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/7" name="demo_7">Handles</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/8" name="demo_8">还原位置</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/9" name="demo_9">对齐到元素或网格</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/10" name="demo_10">视觉反馈</a>
+        </li>
+        <li>
+            <a href="/plugins/draggable/demo/11" name="demo_11">jQuery UI Draggable + Sortable</a>
+        </li>
+    </ul>
 </div>
-<ul class="left-nav-bar">
-    <li>
-        <a href="/plugins/draggable/demo/01">默认功能</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/02">自动滚动</a>
-    </li>
-        <li>
-        <a href="/plugins/draggable/demo/03">约束运动</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/04">光标样式</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/05">延迟开始</a>
-    </li>
-        <li>
-        <a href="/plugins/draggable/demo/06">事件</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/07">Handles</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/08">还原位置</a>
-    </li>
-        <li>
-        <a href="/plugins/draggable/demo/09">对齐到元素或网格</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/10">视觉反馈</a>
-    </li>
-    <li>
-        <a href="/plugins/draggable/demo/11">jQuery UI Draggable + Sortable</a>
-    </li>
-</ul>
 
 <script>
-    var index = "{{ active_idx | safe }}";
-    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+    var DEMO_IDX = '{{ active_idx | safe }}'; // 全局变量（用于left_nav.js）
 </script>
+<script src="/static/js/PluginSpace/left_nav.js"></script>
+
