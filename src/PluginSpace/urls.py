@@ -10,6 +10,7 @@ urlpatterns = [
     path('datetimepicker/demo/<int:demo_idx>', views.datetimepicker_demo_idx),
     path('draggable/demo/<int:demo_idx>', views.draggable_demo_idx),
     path('droppable/demo/<int:demo_idx>', views.droppable_demo_idx),
+    path('sortable/demo/<int:demo_idx>', views.sortable_demo_idx),
 
     path('datatable/learn02/', views.datatable_learn02, name='datatable'),
     path('datatable/learn03/', views.datatable_learn03, name='datatable'),
@@ -25,13 +26,4 @@ urlpatterns = [
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
 
     path('multiselect/learn01/', views.multiselect_learn01, name='multiselect'),
-
-    path('droppable/demo/01', views.droppable_demo_01),
-    path('droppable/demo/02', views.droppable_demo_02),
-    path('droppable/demo/03', views.droppable_demo_03),
-    path('droppable/demo/04', views.droppable_demo_04),
-    path('droppable/demo/05', views.droppable_demo_05),
-    path('droppable/demo/06', views.droppable_demo_06),
-    path('droppable/demo/07', views.droppable_demo_07),
-
 ]

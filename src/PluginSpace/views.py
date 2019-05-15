@@ -30,6 +30,11 @@ def droppable_demo_idx(request, demo_idx=1):
     return render(request, html, {"demo_idx": demo_idx})
 
 
+def sortable_demo_idx(request, demo_idx=1):
+    html = 'sortable/demo_%d.html' % (demo_idx)
+    return render(request, html, {"demo_idx": demo_idx})
+
+
 def echarts_demo_idx(request, demo_idx=1):
     html = 'echarts/demo_%d.html' % (demo_idx)
     return render(request, html, {"demo_idx": demo_idx})
