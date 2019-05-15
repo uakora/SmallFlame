@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
 
     <style>
-      #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-      #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+        #draggable, #draggable2 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+        #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
     </style>
 {% endblock %}
 {% block js %}
@@ -18,19 +18,23 @@
 <div class="flame-container flame-body">
     <div class="left-column">
         {% block left_nav_bar %}
-        {% include 'droppable_left_nav_bar.html' with active_idx=1 %}
+        {% include 'droppable_left_nav_bar.html' with active_idx=demo_idx %}
         {% endblock %}
     </div>
     <div class="center-column">
         {% block center_content %}
-        <p>在任意的 DOM 元素上启用 droppable 功能，并为可拖拽小部件创建目标。</p>
+        <p>当带有布尔值 <code>revert</code> 选项的 draggable 停止拖拽时，返回 draggable（或它的助手）到原始位置。</p>
 
         <div id="draggable" class="ui-widget-content">
-          <p>请把我拖拽到目标处！</p>
+          <p>当被放置在目标上时还原</p>
+        </div>
+
+        <div id="draggable2" class="ui-widget-content">
+          <p>当未被放置在目标上时还原</p>
         </div>
 
         <div id="droppable" class="ui-widget-header">
-          <p>请放置在这里！</p>
+          <p>请放置在这里</p>
         </div>
         {% endblock %}
     </div>
@@ -41,8 +45,11 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $( "#draggable" ).draggable();
+    $( "#draggable" ).draggable({ revert: "valid" });
+    $( "#draggable2" ).draggable({ revert: "invalid" });
     $( "#droppable" ).droppable({
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
             $( this )
                 .addClass( "ui-state-highlight" )

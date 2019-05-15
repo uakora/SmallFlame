@@ -9,6 +9,7 @@ urlpatterns = [
     path('highcharts/demo/<int:demo_idx>', views.highcharts_demo_idx),
     path('datetimepicker/demo/<int:demo_idx>', views.datetimepicker_demo_idx),
     path('draggable/demo/<int:demo_idx>', views.draggable_demo_idx),
+    path('droppable/demo/<int:demo_idx>', views.droppable_demo_idx),
 
     path('datatable/learn02/', views.datatable_learn02, name='datatable'),
     path('datatable/learn03/', views.datatable_learn03, name='datatable'),

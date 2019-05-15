@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
 
     <style>
-        #draggable, #draggable2 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
         #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+        #draggable, #draggable-nonvalid { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
     </style>
 {% endblock %}
 {% block js %}
@@ -18,23 +18,23 @@
 <div class="flame-container flame-body">
     <div class="left-column">
         {% block left_nav_bar %}
-        {% include 'droppable_left_nav_bar.html' with active_idx=1 %}
+        {% include 'droppable_left_nav_bar.html' with active_idx=demo_idx %}
         {% endblock %}
     </div>
     <div class="center-column">
         {% block center_content %}
-        <p>当带有布尔值 <code>revert</code> 选项的 draggable 停止拖拽时，返回 draggable（或它的助手）到原始位置。</p>
+        <p>使用 <code>accept</code> 选项指定目标 droppable 接受哪一个元素（或元素组）。</p>
 
-        <div id="draggable" class="ui-widget-content">
-          <p>当被放置在目标上时还原</p>
+        <div id="draggable-nonvalid" class="ui-widget-content">
+          <p>我是不能被放置的 draggable</p>
         </div>
 
-        <div id="draggable2" class="ui-widget-content">
-          <p>当未被放置在目标上时还原</p>
+        <div id="draggable" class="ui-widget-content">
+          <p>请拖拽我到目标</p>
         </div>
 
         <div id="droppable" class="ui-widget-header">
-          <p>请放置在这里</p>
+          <p>accept: '#draggable'</p>
         </div>
         {% endblock %}
     </div>
@@ -45,11 +45,11 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $( "#draggable" ).draggable({ revert: "valid" });
-    $( "#draggable2" ).draggable({ revert: "invalid" });
+    $( "#draggable, #draggable-nonvalid" ).draggable();
     $( "#droppable" ).droppable({
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
+        accept: "#draggable",
+        activeClass: "ui-state-hover",
+        hoverClass: "ui-state-active",
         drop: function( event, ui ) {
             $( this )
                 .addClass( "ui-state-highlight" )
