@@ -5,11 +5,8 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
 
     <style>
-        h1 { padding: .2em; margin: 0; }
-        #products { float:left; width: 500px; margin-right: 2em; }
-        #cart { width: 200px; float: left; margin-top: 1em; }
-        /* 定义列表样式，以便最大化 droppable */
-        #cart ol { margin: 0; padding: 1em 0 1em 3em; }
+        #draggable, #draggable2 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+        .droppable-box { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
     </style>
 {% endblock %}
 {% block js %}
@@ -26,48 +23,22 @@
     </div>
     <div class="center-column">
         {% block center_content %}
-        <p>演示如何使用折叠面板来展示产品的目录结构，使用拖拽和放置来添加产品到购物车，购物车中的产品是可排序的。</p>
+        <p>当带有布尔值 <code>revert</code> 选项的 draggable 停止拖拽时，返回 draggable（或它的助手）到原始位置。</p>
 
-
-        <div id="products">
-          <h1 class="ui-widget-header">产品</h1>
-          <div id="catalog">
-            <h2><a href="#">T-Shirts</a></h2>
-            <div>
-              <ul>
-                <li>Lolcat Shirt</li>
-                <li>Cheezeburger Shirt</li>
-                <li>Buckit Shirt</li>
-              </ul>
-            </div>
-            <h2><a href="#">Bags</a></h2>
-            <div>
-              <ul>
-                <li>Zebra Striped</li>
-                <li>Black Leather</li>
-                <li>Alligator Leather</li>
-              </ul>
-            </div>
-            <h2><a href="#">Gadgets</a></h2>
-            <div>
-              <ul>
-                <li>iPhone</li>
-                <li>iPod</li>
-                <li>iPad</li>
-              </ul>
-            </div>
-          </div>
+        <div id="draggable" class="ui-widget-content">
+          <p>当被放置在目标上时还原</p>
         </div>
 
-        <div id="cart">
-          <h1 class="ui-widget-header">购物车</h1>
-          <div class="ui-widget-content">
-            <ol>
-              <li class="placeholder">添加产品到这里</li>
-            </ol>
-          </div>
+        <div id="draggable2" class="ui-widget-content">
+          <p>当未被放置在目标上时还原</p>
         </div>
 
+        <div class="ui-widget-header droppable-box">
+            <p>请放置在这里</p>
+        </div>
+        <div class="ui-widget-header droppable-box">
+            <p>请放置在这里</p>
+        </div>
         {% endblock %}
     </div>
 </div>
@@ -77,26 +48,17 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $( "#catalog" ).accordion();
-    $( "#catalog li" ).draggable({
-      appendTo: "body",
-      helper: "clone"
-    });
-    $( "#cart ol" ).droppable({
-      activeClass: "ui-state-default",
-      hoverClass: "ui-state-hover",
-      accept: ":not(.ui-sortable-helper)",
-      drop: function( event, ui ) {
-        $( this ).find( ".placeholder" ).remove();
-        $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
-      }
-    }).sortable({
-      items: "li:not(.placeholder)",
-      sort: function() {
-        // 获取由 droppable 与 sortable 交互而加入的条目
-        // 使用 connectWithSortable 可以解决这个问题，但不允许您自定义 active/hoverClass 选项
-        $( this ).removeClass( "ui-state-default" );
-      }
+    $( "#draggable" ).draggable({ revert: "valid" });
+    $( "#draggable2" ).draggable({ revert: "invalid" });
+    $( ".droppable-box" ).droppable({
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function( event, ui ) {
+            $( this )
+                .addClass( "ui-state-highlight" )
+                .find( "p" )
+                .html( "Dropped!" );
+        }
     });
 });
 

@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
+
+    <style>
+        #draggable, #draggable2 { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+        #droppable, #droppable2 { width: 120px; height: 120px; padding: 0.5em; float: left; margin: 10px; }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'droppable_left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <p>当悬停在 droppable 上时，或者当 droppable 被激活（即一个可接受的 draggable 被放置在 droppable 上）时，
+            改变 droppable 的外观。使用 <code>hoverClass</code> 或 <code>activeClass</code> 选项来分别指定 class。
+        </p>
+        <h3>当悬停在 droppable 上时的反馈：</h3>
+
+        <div id="draggable" class="ui-widget-content">
+            <p>请拖拽我到目标</p>
+        </div>
+
+        <div id="droppable" class="ui-widget-header">
+            <p>请放置在这里</p>
+        </div>
+
+        <h3 style="clear: both;">当激活 draggable 时的反馈：</h3>
+
+        <div id="draggable2" class="ui-widget-content">
+            <p>请拖拽我到目标</p>
+        </div>
+
+        <div id="droppable2" class="ui-widget-header">
+            <p>请放置在这里</p>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      hoverClass: "ui-state-hover",
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+
+    $( "#draggable2" ).draggable();
+    $( "#droppable2" ).droppable({
+      accept: "#draggable2",
+      activeClass: "ui-state-default",
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+});
+
+</script>
+{% endblock %}
+

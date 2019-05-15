@@ -2,14 +2,19 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.css">
 
     <style>
-
+        h1 { padding: .2em; margin: 0; }
+        #products { float:left; width: 500px; margin-right: 2em; }
+        #cart { width: 200px; float: left; margin-top: 1em; }
+        /* 定义列表样式，以便最大化 droppable */
+        #cart ol { margin: 0; padding: 1em 0 1em 3em; }
     </style>
 {% endblock %}
 {% block js %}
     <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
-    <script src="/static/plugins/echarts4.2.1/echarts.js"></script>
+    <script src="/static/plugins/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +26,48 @@
     </div>
     <div class="center-column">
         {% block center_content %}
-        <div id="my_chart" style="height: 250px;"></div>
+        <p>演示如何使用折叠面板来展示产品的目录结构，使用拖拽和放置来添加产品到购物车，购物车中的产品是可排序的。</p>
+
+
+        <div id="products">
+          <h1 class="ui-widget-header">产品</h1>
+          <div id="catalog">
+            <h2><a href="#">T-Shirts</a></h2>
+            <div>
+              <ul>
+                <li>Lolcat Shirt</li>
+                <li>Cheezeburger Shirt</li>
+                <li>Buckit Shirt</li>
+              </ul>
+            </div>
+            <h2><a href="#">Bags</a></h2>
+            <div>
+              <ul>
+                <li>Zebra Striped</li>
+                <li>Black Leather</li>
+                <li>Alligator Leather</li>
+              </ul>
+            </div>
+            <h2><a href="#">Gadgets</a></h2>
+            <div>
+              <ul>
+                <li>iPhone</li>
+                <li>iPod</li>
+                <li>iPad</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="cart">
+          <h1 class="ui-widget-header">购物车</h1>
+          <div class="ui-widget-content">
+            <ol>
+              <li class="placeholder">添加产品到这里</li>
+            </ol>
+          </div>
+        </div>
+
         {% endblock %}
     </div>
 </div>
@@ -31,50 +77,26 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    var my_chart = echarts.init(document.getElementById("my_chart"));
-    var option = {
-        color: ['#3398DB'],
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                axisTick: {
-                    alignWithLabel: true
-                },
-                triggerEvent: true
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'直接访问',
-                type:'bar',
-                barWidth: '60%',
-                data:[10, 52, 200, 334, 390, 330, 220]
-            }
-        ]
-    };
-    my_chart.setOption(option);
-
-    my_chart.on("click", function (params) {
-        console.log("params: ", params);
-        console.log("componentType:", params.componentType);
+    $( "#catalog" ).accordion();
+    $( "#catalog li" ).draggable({
+      appendTo: "body",
+      helper: "clone"
+    });
+    $( "#cart ol" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+      accept: ":not(.ui-sortable-helper)",
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // 获取由 droppable 与 sortable 交互而加入的条目
+        // 使用 connectWithSortable 可以解决这个问题，但不允许您自定义 active/hoverClass 选项
+        $( this ).removeClass( "ui-state-default" );
+      }
     });
 });
 
