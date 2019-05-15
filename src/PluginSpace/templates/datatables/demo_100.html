@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+{% endblock %}
+{% block js %}
+    <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
+    <script src="/static/3rdLibs/bootstrap-3.3.7/js/bootstrap.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'datatables_left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <table id="example" class="table table-hover" style="width: 100%;"></table>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+"user strict"
+
+$(document).ready(function () {
+    $("#example").DataTable({
+        'language': {
+            'url': "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
+        },
+        "ajax": "/static/data/objects.txt",
+        "columns": [
+            {"data": "name", "title": "Name"},
+            {"data": "position", "title": "Position"},
+            {"data": "office", "title": "Office"},
+            {"data": "extn", "title": "Extn"},
+            {"data": "start_date", "title": "Start Date"},
+            {"data": "salary", "title": "Salary"}
+        ],
+        "columnDefs": [
+
+        ]
+    });
+
+});
+
+</script>
+{% endblock %}
+
