@@ -31,7 +31,7 @@
 "user strict"
 
 $(document).ready(function () {
-    $("#example").DataTable({
+    var dt_table = $("#example").DataTable({
         'language': {
             'url': "/static/plugins/datatables-1.10.18/i18n/Chinese.lang"
         },
@@ -66,11 +66,16 @@ $(document).ready(function () {
                 'targets': 6,
                 'createdCell': function (cell, cellData, rowData, rowIndex, colIndex ) {
                     $(cell).html("操作");
+                    if(rowIndex > 2) {
+                        console.log("rowIndex: ", rowIndex);
+                        $(cell).closest("tr").addClass("row-disable");
+                    }
                 }
             }
         ],
         "rowReorder": {
-            dataSrc: "idx"
+            dataSrc: "idx",
+            selector: "tr:not(.row-disable) td:not(:last-child)" 
         }
     });
 
