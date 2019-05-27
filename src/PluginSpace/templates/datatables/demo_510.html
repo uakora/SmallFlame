@@ -5,6 +5,12 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/datatables-1.10.18/datatables.css">
 
     <link rel="stylesheet" type="text/css" href="/static/css/PluginSpace/datatables/common.css">
+
+    <style>
+        #example tbody tr td input {
+            width: 100%;
+        }
+    </style>
 {% endblock %}
 {% block js %}
     <script src="/static/plugins/datatables-1.10.18/datatables.js"></script>
@@ -21,6 +27,12 @@
     <div class="center-column">
         {% block center_content %}
         <table id="example" class="table table-bordered" style="width: 100%;"></table>
+
+        <section style="display: none">
+        <div name="opt-btn">
+            <button class="btn btn-xs btn-default btn-edit">编辑</button>
+        </div>
+        </section>
         {% endblock %}
     </div>
 </div>
@@ -65,17 +77,29 @@ $(document).ready(function () {
             {
                 'targets': 6,
                 'createdCell': function (cell, cellData, rowData, rowIndex, colIndex ) {
-                    $(cell).html("操作");
+                    var $dom = $('div[name="opt-btn"]').clone();
+                    $(cell).html($dom[0].innerHTML);
                     if(rowIndex > 2) {
                         console.log("rowIndex: ", rowIndex);
                         $(cell).closest("tr").addClass("row-disable");
                     }
+
+                    $(cell).on('click', 'button.btn-edit', function () {
+                        var $row = $(cell).closest("tr");
+                        $row.addClass("row-disable");
+                        console.log("row: ", $row.find('td'));
+                         $row.find('td').eq(0).html('<input type="text">');
+                         $row.find('td').eq(1).html('<input type="text">');
+                         $row.find('td').eq(2).html('<input type="text">');
+                         $row.find('td').eq(3).html('<input type="text">');
+                    });
+
                 }
             }
         ],
         "rowReorder": {
             dataSrc: "idx",
-            selector: "tr:not(.row-disable) td:not(:last-child)" 
+            selector: "tr:not(.row-disable) td:not(:last-child)"
         }
     });
 
