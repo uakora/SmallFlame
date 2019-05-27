@@ -108,8 +108,12 @@
 
 $(document).ready(function () {
     $("#example").DataTable({
-        'ordering': false,
-        'rowReorder': true
+        'rowReorder': {
+            selector: 'tr'
+        },
+        'columnDefs': [
+            { targets: 0, visible: false }
+        ]
     });
 
 });

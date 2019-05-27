@@ -185,3 +185,19 @@ def multiselect_learn01(request):
         {'id': 3, 'name': 'DEVELOPER'}, {'id': 4, 'name': 'TEST'}
     ]
     return render(request, 'multiselect/learn01.html', {'roles': roles})
+
+
+def mr_config_list(request):
+    data = []
+    ids = [11, 22, 33, 44, 55]
+    old_vs = ['ba_18A', 'jk_18B', 'pl_19A', 'yy_19B', 'zx_20A']
+    new_vs = ['ns_18A', 'cd_18B', 'tr_19A', 'ys_19B', 'kh_20A']
+    for i in range(len(ids)):
+        data.append({
+            'id': ids[i],
+            'old_vs': old_vs[i],
+            'new_vs': new_vs[i],
+            'branch': 'master',
+            'node': '节点：41470937240832'
+        })
+    return HttpResponse(json.dumps({'data': data}))

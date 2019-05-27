@@ -26,4 +26,6 @@ urlpatterns = [
     path('datatable/data/year', views.datatable_data_year, name='datatable'),
 
     path('multiselect/learn01/', views.multiselect_learn01, name='multiselect'),
+
+    path('datatables/data/mr/config/list', views.mr_config_list)
 ]

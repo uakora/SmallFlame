@@ -108,8 +108,9 @@
 
 $(document).ready(function () {
     $("#example").DataTable({
-        'ordering': false,
-        'rowReorder': true
+        'rowReorder': {
+            'snapX': 10
+        }
     });
 
 });

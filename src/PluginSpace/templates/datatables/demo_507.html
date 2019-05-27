@@ -95,6 +95,24 @@
             <td>777 777</td>
             <td>777 777 7</td>
         </tr>
+        <tr>
+            <td>8</td>
+            <td>88</td>
+            <td>888</td>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>99</td>
+            <td>999</td>
+            <td>9</td>
+            <td>9</td>
+            <td>9</td>
+            <td>9</td>
+        </tr>
         </tbody>
         </table>
         {% endblock %}
@@ -106,12 +124,13 @@
 <script type="text/javascript">
 "user strict"
 
-$(document).ready(function () {
-    $("#example").DataTable({
-        'ordering': false,
-        'rowReorder': true
-    });
+$.extend(
+    $.fn.dataTable.RowReorder.defaults, {selector: 'tr'}
+);
+$.fn.dataTable.defaults.rowReorder = true;
 
+$(document).ready(function () {
+    var dt_table = $("#example").DataTable();
 });
 
 </script>

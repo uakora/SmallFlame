@@ -108,8 +108,10 @@
 
 $(document).ready(function () {
     $("#example").DataTable({
-        'ordering': false,
-        'rowReorder': true
+        'rowReorder': {
+            selector: 'td:nth-child(2)'
+        },
+        'responsive': true
     });
 
 });
