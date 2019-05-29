@@ -1,34 +1,38 @@
-<div class="left-nav-title">
-    <i class="fa fa-reorder"></i>ECharts示例
+<div class="left-nav-box">
+    <div class="left-nav-title">
+        <i class="fa fa-reorder"></i>ECharts基础
+    </div>
+    <ul class="left-nav-bar">
+        <li>
+            <a href="/plugins/echarts/demo/1" name="demo_1">示例一</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/2" name="demo_2">示例二</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/3" name="demo_3">示例三</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/4" name="demo_4">示例四</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/5" name="demo_5">示例五</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/6" name="demo_6">示例六</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/7" name="demo_7">示例七</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/8" name="demo_8">示例八</a>
+        </li>
+        <li>
+            <a href="/plugins/echarts/demo/9" name="demo_9">示例九</a>
+        </li>
+    </ul>
 </div>
-<ul class="left-nav-bar">
-    <li>
-        <a href="/plugins/echarts/demo/1">渐变色 阴影 点击缩放</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/2">barGap示例</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/3">排名</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/4">示例</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/5">示例</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/6">示例</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/7">示例</a>
-    </li>
-    <li>
-        <a href="/plugins/echarts/demo/8">示例</a>
-    </li>
-</ul>
-
 <script>
-    var index = "{{ active_idx | safe }}";
-    $("ul.left-nav-bar > li").eq(Number(index) -1).find("a:first-child").addClass("active");
+    var DEMO_IDX = '{{ active_idx | safe }}'; // 全局变量（用于left_nav.js）
 </script>
+<script src="/static/js/PluginSpace/left_nav.js"></script>
