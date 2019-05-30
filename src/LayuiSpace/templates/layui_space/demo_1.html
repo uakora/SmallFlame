@@ -1,0 +1,31 @@
+{% extends 'layui_space/base.html' %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'layui_space/left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+        <h4>提示框</h4>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+"user strict"
+
+layui.use(['layer', 'form'], function () {
+    var layer = layui.layer;
+    var form = layui.form;
+
+    layer.msg('Hello, Fly LayUI');
+});
+
+</script>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/3rdLibs/layui-v2.4.5/css/layui.css">
+{% endblock %}
+{% block js %}
+    <script src="/static/3rdLibs/layui-v2.4.5/layui.js"></script>
+{% endblock %}
+
+{# 用于需要单独设置 #}
+{% block layui_space_css %}{% endblock %}
+{% block layui_space_js %}{% endblock %}
+
+{% block content %}
+<div class="flame-container flame-body">
+    <div class="left-column">
+        {% block left_nav_bar %}
+        {% include 'layui_space/left_nav_bar.html' with active_idx=demo_idx %}
+        {% endblock %}
+    </div>
+    <div class="center-column">
+        {% block center_content %}
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+"user strict"
+
+</script>
+{% endblock %}
+
