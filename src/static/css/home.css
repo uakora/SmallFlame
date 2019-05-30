@@ -87,6 +87,16 @@ ul.flame-nav-bar > li > a.active{
     border: 1px solid #eaeaea;
     border-radius: 5px;
 }
+.flame-body .body-main{
+    position: relative;
+    padding: 8px 13px;
+    width: 100%;
+    height: auto;
+    min-height: 320px;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+}
 .left-nav-box {
     border: 1px solid #46b8da;
     border-top-width: 0;

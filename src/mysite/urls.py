@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.page_home),
     path('plugins/', include('PluginSpace.urls')),
     path('css/', include('CssSpace.urls')),
+    path('layui/', include('LayuiSpace.urls')),
 ]
