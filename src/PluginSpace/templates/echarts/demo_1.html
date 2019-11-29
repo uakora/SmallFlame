@@ -24,6 +24,54 @@
 
 {% block custom_js %}
 <script type="text/javascript">
+var option = {
+    title: {
+        text: '仿highcharts区域',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'axis',
+        formatter: '{b}<br/>{a2}: {c2}<br/>{a0}:  {c0}<br/>{a1}:  {c1}'
+
+    },
+    legend: {
+        data:['最大值','中间值','最小值']
+    },
+    toolbox: {
+        show: true,
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一','周二','周三','周四','周五','周六','周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        name: '最小值',
+        type: 'line',
+        smooth: true,
+        stack: '区域',
+        data: [10, 22, 34, 16, 16, 20, 22]
+    },
+    {
+        name: '最大值',
+        type: 'line',
+        smooth: true,
+        stack: '区域',
+        data: [30, 32, 42, 36, 38, 40, 42],
+        areaStyle: {}
+    },
+    {
+        name: '中间值',
+        type: 'line',
+        smooth: true,
+        data: [20, 30, 40, 30, 40, 53, 32]
+    }]
+};
+var mChart = echarts.init(document.getElementById('example'));
+mChart.setOption(option);
 
 </script>
 {% endblock %}
