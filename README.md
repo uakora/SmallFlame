@@ -12,3 +12,8 @@ Manual Install
 
 https://github.com/davidstutz/bootstrap-multiselect
 
+border: 1px solid rgb(255,86,91);
+background: -webkit-linear-gradient(left, rgb(255,86,91) , white);
+
+
+
